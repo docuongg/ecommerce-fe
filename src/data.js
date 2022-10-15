@@ -47,7 +47,7 @@ export const popularProducts = [
   },
   {
     id: 2,
-    img: "https://cdn.shopify.com/s/files/1/0101/4832/products/Angela_Natural_Tee.png?v=1606780388",
+    img: "https://cdn.sanity.io/images/779b79hk/production/4e4200bf99650f88c5442979eb745380428758e1-2000x3000.png",
   },
   {
     id: 3,
@@ -67,7 +67,7 @@ export const popularProducts = [
   },
   {
     id: 7,
-    img: "https://www.vintageindustries.nl/download_front/qympzk1762/2217_Arrow_Jacket_Forest.png",
+    img: "https://lzd-img-global.slatic.net/g/p/16fd174e1a5f432c8b16d91efc333db6.png_1200x1200q80.jpg_.webp",
   },
   {
     id: 8,

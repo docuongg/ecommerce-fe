@@ -8,7 +8,7 @@ const Container = styled.div`
   height: 100vh;
   display: flex;
   position: relative;
-  /* overflow: hidden; */
+  overflow: hidden;
 `;
 
 const Arrow = styled.div`
@@ -81,6 +81,11 @@ const Button = styled.button`
   font-size: 20px;
   background-color: transparent;
   cursor: pointer;
+  transition: all .5s ease;
+  &:hover {
+    background-color: teal;
+    color: #fff;
+  }
 `;
 
 export default function Slider() {
@@ -102,7 +107,7 @@ export default function Slider() {
       </Arrow>
       <Wrapper slideIndex={slideIndex}>
         {sliderItems.map((item) => (
-          <Slide bg={item.bg}>
+          <Slide bg={item.bg} key={item.id}>
             <ImgContainer>
               <Image src={item.img} />
             </ImgContainer>
