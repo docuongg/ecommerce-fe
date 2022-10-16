@@ -18,7 +18,13 @@ const Info = styled.div`
   justify-content: center;
   align-items: center;
   gap: 15px;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
+`;
+
+const Image = styled.img`
+  height: 75%;
+  z-index: 2;
+  transition: all 0.3s ease;
 `;
 
 const Container = styled.div`
@@ -31,22 +37,14 @@ const Container = styled.div`
   align-items: center;
   background-color: #f5fbfd;
   position: relative;
-  &:hover ${Info}{
-	opacity: 1;
+  &:hover {
+    ${Info} {
+      opacity: 1;
+    }
+    ${Image} {
+      opacity: 0.5;
+    }
   }
-`;
-
-const Circle = styled.div`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background-color: #fff;
-  position: absolute;
-`;
-
-const Image = styled.img`
-  height: 75%;
-  z-index: 2;
 `;
 
 const Icon = styled.div`
@@ -68,7 +66,6 @@ const Icon = styled.div`
 export default function Product({ item }) {
   return (
     <Container>
-      {/* <Circle /> */}
       <Image src={item.img} />
       <Info>
         <Icon>

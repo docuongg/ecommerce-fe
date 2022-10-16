@@ -15,7 +15,7 @@ const Arrow = styled.div`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #fff7f7;
+  background-color: #ed6f6f;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -116,7 +116,7 @@ export default function Slider() {
               <Desc>
                 {item.desc}
               </Desc>
-              <Button>SHOW NOW</Button>
+              <Button>XEM NGAY</Button>
             </InfoContainer>
           </Slide>
         ))}

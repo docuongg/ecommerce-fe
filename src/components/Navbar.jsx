@@ -65,18 +65,18 @@ export default function Navbar() {
     <Container>
       <Wrapper>
         <Left>
-          <Language>EN</Language>
+          <Language>VI</Language>
           <SeacrhContainer>
             <Input />
             <Search style={{fontSize: 16, color: 'gray'}}/>
           </SeacrhContainer>
         </Left>
         <Center>
-          <Logo>TuanDung</Logo>
+          <Logo>BILUXURY</Logo>
         </Center>
         <Right>
-          <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
+          <MenuItem>ĐĂNG KÝ</MenuItem>
+          <MenuItem>ĐĂNG NHẬP</MenuItem>
           <MenuItem>
             <Badge badgeContent={4} color="secondary">
               <ShoppingCartOutlined />
