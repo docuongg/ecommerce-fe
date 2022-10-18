@@ -208,19 +208,19 @@ export default function Cart() {
               <SummaryTitle>ORDER SUMMARY</SummaryTitle>
               <SummaryItem>
                 <SummaryItemText>Giá tiền</SummaryItemText>
-                <SummaryItemPrice>$ 80</SummaryItemPrice>
+                <SummaryItemPrice>$ 500</SummaryItemPrice>
               </SummaryItem>
               <SummaryItem>
                 <SummaryItemText>Phí giao hàng</SummaryItemText>
-                <SummaryItemPrice>$ 5</SummaryItemPrice>
+                <SummaryItemPrice>$ 10</SummaryItemPrice>
               </SummaryItem>
               <SummaryItem>
                 <SummaryItemText>Khuyến mãi</SummaryItemText>
-                <SummaryItemPrice>$ -15</SummaryItemPrice>
+                <SummaryItemPrice>$ -25</SummaryItemPrice>
               </SummaryItem>
               <SummaryItem style={{ fontWeight: "200", fontSize: "28px" }}>
                 <SummaryItemText>Tổng thanh toán</SummaryItemText>
-                <SummaryItemPrice>$ 70</SummaryItemPrice>
+                <SummaryItemPrice>$ 465</SummaryItemPrice>
               </SummaryItem>
               <SummaryButton>Thanh toán ngay</SummaryButton>
             </Summary>

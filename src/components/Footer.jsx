@@ -12,6 +12,7 @@ import { mobile } from "../responsive";
 
 const Container = styled.div`
   display: flex;
+  background-color: #d2d2d2;
   ${mobile({flexDirection: 'column'})}
 `;
 
@@ -92,9 +93,9 @@ export default function Footer() {
       <Left>
         <Logo>BILUXURY</Logo>
         <Desc>
-          Thời trang nam - quần áo nam cao cấp ✓ chất liệu vải cao cấp thân
-          thiện môi trường ✓ 10 năm phát triển & cống hiến xã hội ✓ tự tin toả
-          sáng mọi nơi.
+          Thời trang cao cấp ✓ <br/>
+          Chất liệu vải cao cấp thân thiện môi trường ✓ <br/>
+          10 năm phát triển & cống hiến xã hội ✓ <br/>
         </Desc>
         <SocialContainer>
           <SocialIcon color="3b5999">

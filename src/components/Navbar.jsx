@@ -4,10 +4,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { mobile } from "../responsive";
 import styled, { css } from "styled-components";
-import { display } from "@mui/system";
 
 const Container = styled.div`
   height: 60px;
+  background-color: #d2d2d2;
   ${mobile({ height: "50px" })}
 `;
 
@@ -32,7 +32,7 @@ const Language = styled.div`
 `;
 
 const SeacrhContainer = styled.div`
-  border: 0.5px solid lightgray;
+  background-color: #fff;
   display: flex;
   align-items: center;
   margin-left: 25px;
@@ -100,7 +100,7 @@ export default function Navbar() {
             <Link style={linkStyle} to="/register">Đăng ký</Link>
           </MenuItem>
           <MenuItem>
-            <Badge badgeContent={4} color="secondary">
+            <Badge badgeContent={4} color="primary">
               <Link to='/cart' style={linkStyle}>
                 <ShoppingCartOutlined />
               </Link>
