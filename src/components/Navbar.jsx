@@ -1,10 +1,13 @@
 import { Search, ShoppingCartOutlined } from "@mui/icons-material";
 import { Badge } from "@mui/material";
 import React from "react";
-import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { mobile } from "../responsive";
+import styled, { css } from "styled-components";
 
 const Container = styled.div`
   height: 60px;
+  ${mobile({ height: "50px" })}
 `;
 
 const Wrapper = styled.div`
@@ -12,6 +15,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  ${mobile({ padding: "10px 0" })}
 `;
 
 const Left = styled.div`
@@ -23,6 +27,7 @@ const Left = styled.div`
 const Language = styled.div`
   font-size: 14px;
   cursor: pointer;
+  ${mobile({ display: "none" })}
 `;
 
 const SeacrhContainer = styled.div`
@@ -31,11 +36,13 @@ const SeacrhContainer = styled.div`
   align-items: center;
   margin-left: 25px;
   padding: 5px;
+  ${mobile({ marginLeft: "5px" })}
 `;
 
 const Input = styled.input`
   border: none;
   outline: none;
+  ${mobile({ display: "none" })}
 `;
 
 const Center = styled.div`
@@ -45,6 +52,7 @@ const Center = styled.div`
 const Logo = styled.h1`
   font-weight: bold;
   text-align: center;
+  ${mobile({ fontSize: "24px" })}
 `;
 
 const Right = styled.div`
@@ -52,13 +60,24 @@ const Right = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  ${mobile({
+    justifyContent: "center",
+    flex: "2",
+    "&:first-child": "display: none",
+  })}
 `;
 
 const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;
+  ${mobile({ fontSize: "12px", marginLeft: "10px" })}
 `;
+
+const linkStyle = {
+  textDecoration: 'none',
+  color: '#333'
+}
 
 export default function Navbar() {
   return (
@@ -67,19 +86,25 @@ export default function Navbar() {
         <Left>
           <Language>VI</Language>
           <SeacrhContainer>
-            <Input />
-            <Search style={{fontSize: 16, color: 'gray'}}/>
+            <Input placeholder="Tìm kiếm" />
+            <Search style={{ fontSize: 16, color: "gray" }} />
           </SeacrhContainer>
         </Left>
         <Center>
-          <Logo>BILUXURY</Logo>
+          <Logo><Link style={linkStyle} to='/'>BILUXURY</Link></Logo>
         </Center>
         <Right>
-          <MenuItem>ĐĂNG KÝ</MenuItem>
-          <MenuItem>ĐĂNG NHẬP</MenuItem>
+          <MenuItem>
+            <Link style={linkStyle} to="/register">ĐĂNG KÝ</Link>
+          </MenuItem>
+          <MenuItem>
+            <Link style={linkStyle} to="/login">ĐĂNG NHẬP</Link>
+          </MenuItem>
           <MenuItem>
             <Badge badgeContent={4} color="secondary">
-              <ShoppingCartOutlined />
+              <Link to='/cart' style={linkStyle}>
+                <ShoppingCartOutlined />
+              </Link>
             </Badge>
           </MenuItem>
         </Right>

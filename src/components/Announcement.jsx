@@ -1,6 +1,7 @@
 import { Clear } from "@mui/icons-material"
 import { useState } from "react"
 import styled from "styled-components"
+import { mobile } from "../responsive"
 
 const Content = styled.div`
 	height: 40px;
@@ -14,6 +15,7 @@ const Content = styled.div`
 	position: sticky;
 	top: 0;
 	z-index: 999;
+	${mobile({display: 'none'})}
 `
 
 const Icon = styled.div`

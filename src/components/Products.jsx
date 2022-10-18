@@ -13,7 +13,7 @@ export default function Products() {
   return (
 	<Container>
 		{popularProducts.map(item => (
-			<Product item={item} />
+			<Product key={item.id} item={item} />
 		))}
 	</Container>
   )

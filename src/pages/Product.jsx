@@ -79,82 +79,81 @@ const AddContainer = styled.div`
 `;
 
 const AmountContainer = styled.div`
-	display: flex;
-	align-items: center;
-	font-weight: 700;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
 `;
 
 const Amount = styled.span`
-	width: 30px;
-	height: 30px;
-	border: 1px solid teal;
-	border-radius: 10px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid teal;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Button = styled.button`
-	padding: 10px 15px;
-	border: 2px solid teal;
-	background: #fff;
-	cursor: pointer;
-	font-weight: 600;
-	transition: all .5s ease;
-	&:hover {
-		color: teal;
-	}
-
+  padding: 10px 15px;
+  border: 2px solid teal;
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.5s ease;
+  &:hover {
+    color: teal;
+  }
 `;
 
 export default function Product() {
   return (
-    <Container>
-      <Announcement />
+    <>
       <Navbar />
-      <Wreapper>
-        <ImgContainer>
-          <Image src="https://i.ibb.co/S6qMxwr/jean.jpg" />
-        </ImgContainer>
-        <InfoContainer>
-          <Title>Denim Jumpsuit</Title>
-          <Desc>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam,
-            voluptates soluta tempora voluptatem accusantium rerum fuga delectus
-            at iure. Nulla, eos consequuntur hic repellendus deserunt
-            accusantium veniam expedita in modi!
-          </Desc>
-          <Price>$20</Price>
-          <FilterContainer>
-            <Filter>
-              <FilterTitle>Màu sắc</FilterTitle>
-              <FilterColor color="gray" />
-              <FilterColor color="pink" />
-              <FilterColor color="aqua" />
-            </Filter>
-            <Filter>
-              <FilterTitle>Kích cỡ</FilterTitle>
-              <FilterSize>
-                <FilterOption>XS</FilterOption>
-                <FilterOption>S</FilterOption>
-                <FilterOption>M</FilterOption>
-                <FilterOption>L</FilterOption>
-                <FilterOption>XL</FilterOption>
-              </FilterSize>
-            </Filter>
-          </FilterContainer>
-          <AddContainer>
-            <AmountContainer>
-              <Remove />
-              <Amount>1</Amount>
-              <Add />
-            </AmountContainer>
-            <Button>Thêm vào giỏ hàng</Button>
-          </AddContainer>
-        </InfoContainer>
-      </Wreapper>
-      <Newsletter />
+      <Container>
+        <Wreapper>
+          <ImgContainer>
+            <Image src="https://i.ibb.co/S6qMxwr/jean.jpg" />
+          </ImgContainer>
+          <InfoContainer>
+            <Title>Denim Jumpsuit</Title>
+            <Desc>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam,
+              voluptates soluta tempora voluptatem accusantium rerum fuga
+              delectus at iure. Nulla, eos consequuntur hic repellendus deserunt
+              accusantium veniam expedita in modi!
+            </Desc>
+            <Price>$20</Price>
+            <FilterContainer>
+              <Filter>
+                <FilterTitle>Màu sắc</FilterTitle>
+                <FilterColor color="gray" />
+                <FilterColor color="pink" />
+                <FilterColor color="aqua" />
+              </Filter>
+              <Filter>
+                <FilterTitle>Kích cỡ</FilterTitle>
+                <FilterSize>
+                  <FilterOption>XS</FilterOption>
+                  <FilterOption>S</FilterOption>
+                  <FilterOption>M</FilterOption>
+                  <FilterOption>L</FilterOption>
+                  <FilterOption>XL</FilterOption>
+                </FilterSize>
+              </Filter>
+            </FilterContainer>
+            <AddContainer>
+              <AmountContainer>
+                <Remove />
+                <Amount>1</Amount>
+                <Add />
+              </AmountContainer>
+              <Button>Thêm vào giỏ hàng</Button>
+            </AddContainer>
+          </InfoContainer>
+        </Wreapper>
+      </Container>
       <Footer />
-    </Container>
+    </>
   );
 }

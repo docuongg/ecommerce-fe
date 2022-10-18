@@ -44,6 +44,8 @@ const Wrapper = styled.div`
 `;
 
 const Slide = styled.div`
+  box-sizing: border-box;
+  padding: 0 40px;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -103,7 +105,7 @@ export default function Slider() {
   return (
     <Container>
       <Arrow direction="left" onClick={() => handleClick("left")}>
-        <ArrowLeftOutlined />
+        <ArrowLeftOutlined style={{fontSize: '35px'}}/>
       </Arrow>
       <Wrapper slideIndex={slideIndex}>
         {sliderItems.map((item) => (
@@ -122,7 +124,7 @@ export default function Slider() {
         ))}
       </Wrapper>
       <Arrow direction="right" onClick={() => handleClick("right")}>
-        <ArrowRightOutlined />
+        <ArrowRightOutlined style={{fontSize: '35px'}}/>
       </Arrow>
     </Container>
   );
