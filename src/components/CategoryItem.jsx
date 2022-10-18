@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { mobile } from "../responsive"
 
 const Button = styled.button`
 	border: none;
@@ -19,14 +20,16 @@ const Container = styled.div`
 	height: 70vh;
 	position: relative;
 	&:hover ${Button} {
-		background-color: rgba(255, 255, 255, 0.8);;
+		background-color: rgba(255, 255, 255, 0.8);
 	}
+	${mobile({margin: '0 0 5px 0'})}
 `
 
 const Image = styled.img`
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+	${mobile({height: '40vh'})}
 `
 
 const Info = styled.div`

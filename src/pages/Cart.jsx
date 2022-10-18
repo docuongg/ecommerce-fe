@@ -1,15 +1,17 @@
 import { Add, Remove } from "@mui/icons-material";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { carts } from "../data";
+import { mobile } from "../responsive";
 
-const Container = styled.div`
-`;
+const Container = styled.div``;
 
 const Wrapper = styled.div`
   padding: 20px;
+  ${mobile({ padding: "5px" })}
 `;
 
 const Title = styled.h1`
@@ -22,6 +24,7 @@ const Top = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 20px;
+  ${mobile({ display: "none" })}
 `;
 
 const TopButton = styled.button`
@@ -29,7 +32,8 @@ const TopButton = styled.button`
   font-weight: 600;
   cursor: pointer;
   border: ${(props) => props.type === "filled" && "none"};
-  background: ${(props) => (props.type === "filled" ? "lightgray" : "transparent")};
+  background: ${(props) =>
+    props.type === "filled" ? "lightgray" : "transparent"};
 `;
 
 const TopTexts = styled.div``;
@@ -43,17 +47,20 @@ const TopText = styled.span`
 const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const Info = styled.div`
   flex: 3;
   padding-right: 20px;
+  ${mobile({ padding: "0" })}
 `;
 
 const Product = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 20px 10px;
+  ${mobile({ flexDirection: "column" })}
 `;
 
 const ProductDetail = styled.div`
@@ -89,12 +96,14 @@ const PriceDetail = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  ${mobile({ backgroundColor: "#f8d2d2", borderRadius: "5px" })}
 `;
 
 const ProductAmountContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  ${mobile({ marginBottom: "5px" })}
 `;
 
 const ProductAmount = styled.div`
@@ -105,10 +114,12 @@ const ProductAmount = styled.div`
 const ProductPrice = styled.div`
   font-size: 30px;
   font-weight: 200;
+  ${mobile({ fontSize: "25px" })}
 `;
 
 const Summary = styled.div`
   flex: 1;
+  height: 100%;
   border: 1px solid lightgray;
   border-radius: 10px;
   padding: 20px;
@@ -116,6 +127,7 @@ const Summary = styled.div`
 
 const SummaryTitle = styled.h1`
   font-weight: 200;
+  ${mobile({ textAlign: "center" })}
 `;
 
 const SummaryItem = styled.div`
@@ -137,6 +149,38 @@ const SummaryButton = styled.button`
   font-size: 20px;
 `;
 
+function CartItem({item}) {
+  const [amount, setAmount] = useState(item.amount)
+
+  return (
+    <Product>
+      <ProductDetail>
+        <Image src={item.img} />
+        <Details>
+          <ProductName>
+            <b>Product: </b>{item.product}
+          </ProductName>
+          <ProductId>
+            <b>ID: </b>{item.id}
+          </ProductId>
+          <ProductColor color={item.color} />
+          <ProductSize>
+            <b>Size: </b>{item.size}
+          </ProductSize>
+        </Details>
+      </ProductDetail>
+      <PriceDetail>
+        <ProductAmountContainer>
+          <Remove style={{cursor: 'pointer'}} onClick={() => {amount > 0 ? setAmount(amount-1) : setAmount(0)}} />
+          <ProductAmount>{amount}</ProductAmount>
+          <Add style={{cursor: 'pointer'}} onClick={() => setAmount(amount+1)}/>
+        </ProductAmountContainer>
+        <ProductPrice>$ {item.price * amount}</ProductPrice>
+      </PriceDetail>
+    </Product>
+  );
+}
+
 export default function Cart() {
   return (
     <>
@@ -145,7 +189,9 @@ export default function Cart() {
         <Wrapper>
           <Title>GIỎ HÀNG</Title>
           <Top>
-            <Link to='/productlist'><TopButton>Tiếp tục mua sắm</TopButton></Link>
+            <Link to="/productlist">
+              <TopButton>Tiếp tục mua sắm</TopButton>
+            </Link>
             <TopTexts>
               <TopText>Shopping Bag(2)</TopText>
               <TopText>Your Wishlist(0)</TopText>
@@ -154,83 +200,9 @@ export default function Cart() {
           </Top>
           <Bottom>
             <Info>
-              <Product>
-                <ProductDetail>
-                  <Image src="https://i.pinimg.com/originals/2d/af/f8/2daff8e0823e51dd752704a47d5b795c.png" />
-                  <Details>
-                    <ProductName>
-                      <b>Product: </b>Philz T-Shirt
-                    </ProductName>
-                    <ProductId>
-                      <b>ID: </b>123987456
-                    </ProductId>
-                    <ProductColor color="gray" />
-                    <ProductSize>
-                      <b>Size: </b>M
-                    </ProductSize>
-                  </Details>
-                </ProductDetail>
-                <PriceDetail>
-                  <ProductAmountContainer>
-                    <Remove />
-                    <ProductAmount>2</ProductAmount>
-                    <Add />
-                  </ProductAmountContainer>
-                  <ProductPrice>$ 30</ProductPrice>
-                </PriceDetail>
-              </Product>
-              <hr />
-              <Product>
-                <ProductDetail>
-                  <Image src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png?crop=1xw:1.00xh;center,top&resize=480%3A%2A" />
-                  <Details>
-                    <ProductName>
-                      <b>Product: </b>JESSIE THUNDER SHOES
-                    </ProductName>
-                    <ProductId>
-                      <b>ID: </b>123987456
-                    </ProductId>
-                    <ProductColor color="#25252a" />
-                    <ProductSize>
-                      <b>Size: </b>38
-                    </ProductSize>
-                  </Details>
-                </ProductDetail>
-                <PriceDetail>
-                  <ProductAmountContainer>
-                    <Remove />
-                    <ProductAmount>1</ProductAmount>
-                    <Add />
-                  </ProductAmountContainer>
-                  <ProductPrice>$ 50</ProductPrice>
-                </PriceDetail>
-              </Product>
-              <hr />
-              <Product>
-                <ProductDetail>
-                  <Image src="https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png?crop=1xw:1.00xh;center,top&resize=480%3A%2A" />
-                  <Details>
-                    <ProductName>
-                      <b>Product: </b>JESSIE THUNDER SHOES
-                    </ProductName>
-                    <ProductId>
-                      <b>ID: </b>123987456
-                    </ProductId>
-                    <ProductColor color="#25252a" />
-                    <ProductSize>
-                      <b>Size: </b>38
-                    </ProductSize>
-                  </Details>
-                </ProductDetail>
-                <PriceDetail>
-                  <ProductAmountContainer>
-                    <Remove />
-                    <ProductAmount>1</ProductAmount>
-                    <Add />
-                  </ProductAmountContainer>
-                  <ProductPrice>$ 50</ProductPrice>
-                </PriceDetail>
-              </Product>
+              {carts.map((item, index) => (
+                <CartItem key={index} item={item} />
+              ))}
             </Info>
             <Summary>
               <SummaryTitle>ORDER SUMMARY</SummaryTitle>

@@ -4,6 +4,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { mobile } from "../responsive";
 import styled, { css } from "styled-components";
+import { display } from "@mui/system";
 
 const Container = styled.div`
   height: 60px;
@@ -61,9 +62,7 @@ const Right = styled.div`
   align-items: center;
   justify-content: flex-end;
   ${mobile({
-    justifyContent: "center",
-    flex: "2",
-    "&:first-child": "display: none",
+    marginLeft: '-10px'
   })}
 `;
 
@@ -71,12 +70,12 @@ const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;
-  ${mobile({ fontSize: "12px", marginLeft: "10px" })}
+  ${mobile({ fontSize: "12px", margin: "0 5px 0 0", textAlign: 'center'})}
 `;
 
 const linkStyle = {
   textDecoration: 'none',
-  color: '#333'
+  color: '#333',
 }
 
 export default function Navbar() {
@@ -95,10 +94,10 @@ export default function Navbar() {
         </Center>
         <Right>
           <MenuItem>
-            <Link style={linkStyle} to="/register">ĐĂNG KÝ</Link>
+            <Link style={linkStyle} to="/login">Đăng nhập</Link>
           </MenuItem>
           <MenuItem>
-            <Link style={linkStyle} to="/login">ĐĂNG NHẬP</Link>
+            <Link style={linkStyle} to="/register">Đăng ký</Link>
           </MenuItem>
           <MenuItem>
             <Badge badgeContent={4} color="secondary">

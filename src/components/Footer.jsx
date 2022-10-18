@@ -8,9 +8,11 @@ import {
   Twitter,
 } from "@mui/icons-material";
 import styled from "styled-components";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   display: flex;
+  ${mobile({flexDirection: 'column'})}
 `;
 
 const Left = styled.div`
@@ -18,6 +20,7 @@ const Left = styled.div`
   display: flex;
   flex-direction: column;
   padding: 20px;
+  ${mobile({alignItems: 'center'})}
 `;
 
 const Logo = styled.h1``;
@@ -55,6 +58,7 @@ const Center = styled.div`
 
 const Title = styled.h3`
   margin-bottom: 30px;
+  ${mobile({textAlign: 'center'})}
 `;
 
 const List = styled.ul`

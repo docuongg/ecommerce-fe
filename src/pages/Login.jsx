@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import Navbar from "../components/Navbar";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   width: 100vw;
@@ -21,6 +22,7 @@ const Wrapper = styled.div`
   padding: 20px;
   background-color: #fff;
   border-radius: 10px;
+  ${mobile({width: '80%'})}
 `;
 
 const Titile = styled.h1`
@@ -41,6 +43,7 @@ const Input = styled.input`
   margin: 15px 0;
   padding: 10px 15px;
   font-size: 15px;
+  ${mobile({width: '80%'})}
 `;
 
 const Button = styled.button`
@@ -55,6 +58,7 @@ const Button = styled.button`
   &:hover {
     opacity: 0.9;
   }
+  ${mobile({width: '50%'})}
 `;
 
 const StyledLink = styled(Link)`

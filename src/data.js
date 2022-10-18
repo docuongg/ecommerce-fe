@@ -74,3 +74,33 @@ export const popularProducts = [
     img: "https://www.pngarts.com/files/3/Women-Jacket-PNG-High-Quality-Image.png",
   },
 ];
+
+export const carts = [
+  {
+    product: 'Philz T-Shirt',
+    id: '123987456',
+    color: 'gray',
+    size: 'M',
+    img: 'https://i.pinimg.com/originals/2d/af/f8/2daff8e0823e51dd752704a47d5b795c.png',
+    amount: 1,
+    price: 30,
+  },
+  {
+    product: 'JESSIE THUNDER SHOES',
+    id: '555123712',
+    color: '#25252a',
+    size: '38',
+    img: 'https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1614188818-TD1MTHU_SHOE_ANGLE_GLOBAL_MENS_TREE_DASHERS_THUNDER_b01b1013-cd8d-48e7-bed9-52db26515dc4.png',
+    amount: 1,
+    price: 70,
+  },
+  {
+    product: 'CAT HAT',
+    id: '999888777',
+    color: '#ccc',
+    size: 'M',
+    img: 'https://d3o2e4jr3mxnm3.cloudfront.net/Rocket-Vintage-Chill-Cap_66374_1_lg.png',
+    amount: 2,
+    price: 10,
+  },
+]
