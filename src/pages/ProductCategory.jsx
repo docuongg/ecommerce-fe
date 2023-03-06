@@ -1,10 +1,13 @@
-import { ArrowDropUp, ArrowUpward } from "@mui/icons-material";
 import styled from "styled-components";
-import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
+import { useParams } from "react-router-dom";
+import { index } from "../features/product/productAPI"
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { setProductsByCategory } from "../features/category/categorySlice";
 
 const Container = styled.div``;
 
@@ -37,12 +40,26 @@ const Select = styled.select`
 
 const Option = styled.option``;
 
-export default function ProductList() {
+export default function ProductCategory() {
+  const { id } = useParams();
+
+  const selectedCategory = useSelector(state => state.category.selectedCategory);
+  const products = useSelector(state => state.category.productsByCategory);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    index(id)
+      .then(response => {
+        dispatch(setProductsByCategory(response.data));
+      })
+    window.scrollTo(0, 0);
+  }, [id]);
+
   return (
     <>
       <Navbar />
       <Container>
-        <Title>Áo</Title>
+        <Title>{selectedCategory.name}</Title>
         <FilterContainer>
           <Filter>
             <FilterText>Lọc sản phẩm: </FilterText>
@@ -79,7 +96,7 @@ export default function ProductList() {
             </Select>
           </Filter>
         </FilterContainer>
-        <Products />
+        <Products products = {products}/>
         <Newsletter />
       </Container>
       <Footer />

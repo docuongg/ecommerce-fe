@@ -91,7 +91,7 @@ export default function Footer() {
   return (
     <Container>
       <Left>
-        <Logo>BILUXURY</Logo>
+        <Logo>Fashion Store</Logo>
         <Desc>
           Thời trang cao cấp ✓ <br/>
           Chất liệu vải cao cấp thân thiện môi trường ✓ <br/>
@@ -130,15 +130,15 @@ export default function Footer() {
         <Title>Liên hệ</Title>
         <ContactItem>
           <Room style={{ marginRight: "10px" }} />
-          Hồ Gươm Plaza, 102 Trần Phú
+          Cau Giay, Ha Noi
         </ContactItem>
         <ContactItem>
           <Phone style={{ marginRight: "10px" }} />
-          038 333 8589
+          0986 567 567
         </ContactItem>
         <ContactItem>
           <MailOutline style={{ marginRight: "10px" }} />
-          tuandung13401@gmail.com
+          dncuong@gmail.com
         </ContactItem>
       </Right>
     </Container>

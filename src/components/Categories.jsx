@@ -1,21 +1,43 @@
 import styled from "styled-components"
-import { categories } from '../data'
 import { mobile } from "../responsive"
-import CategoryItem from "./CategoryItem"
+import Category from "./Category"
+import { useSelector, useDispatch } from "react-redux"
+import { useEffect } from "react"
+import { index } from '../features/category/categoryAPI'
+import { setCategories, setSelectedCategory } from '../features/category/categorySlice'
 
 const Container = styled.div`
-	display: flex;
 	padding: 20px;
+	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
-	${mobile({flexDirection: 'column', padding: '0'})}
+	${mobile({padding: '0'})}
 `
 
 export default function Categories() {
+	const categories = useSelector(state => state.category.categories);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Lấy danh sách category từ API
+    index()
+      .then(response => {
+        // Lưu danh sách category vào state
+        dispatch(setCategories(response.data));
+      });
+  }, []);
+
+  const handleCategoryClick = (category) => {
+    console.log("haha")
+    // Chọn một category và lưu vào state
+    dispatch(setSelectedCategory(category));
+  };
+
   return (
-	<Container>
-		{categories.map(item => (
-			<CategoryItem item={item} key={item.id} />
-		))}
-	</Container>
+    <Container>
+      {categories.map(category => (
+        <Category key={category.id} category={category} />
+      ))}
+    </Container>
   )
 }

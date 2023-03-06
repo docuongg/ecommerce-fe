@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { login, register } from "../features/auth/authAPI"
+import { useDispatch } from 'react-redux';
+import { loginStart, loginFailure, loginSuccess } from '../features/auth/authSlice';
 
 const Container = styled.div`
   width: 100vw;
@@ -67,23 +72,51 @@ const Button = styled.button`
 `;
 
 export default function Register() {
+  const [fullname, setFullname] = useState("");
+  const [email, setEmail] = useState("");
+  const [username, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [error, setError] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    register(fullname, email, username, password, passwordConfirmation)
+      .then((response) => {
+        login(email, password)
+        .then((response) => {
+          localStorage.setItem("access-token", response.headers["access-token"]);
+          localStorage.setItem("client", response.headers["client"]);
+          localStorage.setItem("uid", response.headers["uid"]);
+          const { data } = response.data;
+          dispatch(loginSuccess(data));
+        })
+        navigate("/")
+      })
+      .catch((error) => {
+        setError("Invalid email or password");
+      });
+  };
+
   return (
     <>
       <Navbar />
       <Container>
         <Wrapper>
           <Titile>TẠO TÀI KHOẢN</Titile>
-          <Form>
-            <Input placeholder="Họ tên" />
-            <Input placeholder="Email" />
-            <Input placeholder="Tên tài khoản" />
-            <Input placeholder="Mật khẩu" />
-            <Input placeholder="Xác nhận mật khẩu" />
+          <Form onSubmit={handleSubmit}>
+            <Input placeholder="Họ tên" value={fullname} onChange={(e) => setFullname(e.target.value)}/>
+            <Input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <Input placeholder="Tên tài khoản" value={username} onChange={(e) => setUserName(e.target.value)}/>
+            <Input type="password" placeholder="Mật khẩu" value={password} onChange={(e) => setPassword(e.target.value)}/>
+            <Input type="password" placeholder="Xác nhận mật khẩu" value={passwordConfirmation} onChange={(e) => setPasswordConfirmation(e.target.value)}/>
             <Agreement>
               Bằng việc đăng ký, bạn đã đồng ý với chúng tôi về{" "}
               <b>Điều khoản dịch vụ</b> & <b>Chính sách bảo mật</b>
             </Agreement>
-            <Button>ĐĂNG KÝ</Button>
+            <Button type="submit">ĐĂNG KÝ</Button>
           </Form>
         </Wrapper>
       </Container>

@@ -1,4 +1,4 @@
-import ProductList from "./pages/ProductList";
+import ProductCategory from "./pages/ProductCategory";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 import Register from "./pages/Register";
@@ -17,7 +17,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/product" element={<Product />} />
-        <Route path="/productlist" element={<ProductList />} />
+        <Route path="/categories/:id" element={<ProductCategory />} />
       </Routes>
     </Router>
   );

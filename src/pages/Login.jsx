@@ -2,6 +2,11 @@ import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
+import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { loginStart, loginFailure, loginSuccess } from '../features/auth/authSlice';
+import { login } from '../features/auth/authAPI'
 
 const Container = styled.div`
   width: 100vw;
@@ -73,16 +78,45 @@ const StyledLink = styled(Link)`
 `;
 
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [error, setError] = useState("")
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    dispatch(loginStart());
+    login(email, password)
+      .then((response) => {
+        const { data } = response.data;
+        dispatch(loginSuccess(data));
+        localStorage.setItem('access-token', response.headers['access-token'])
+        localStorage.setItem('client', response.headers['client'])
+        localStorage.setItem('uid', response.headers['uid'])
+        navigate("/");
+      })
+      .catch((response) => {
+        dispatch(loginFailure(response.message))
+        setError("Invalid email or password")
+      })
+  };
+
   return (
     <>
       <Navbar />
       <Container>
         <Wrapper>
           <Titile>ĐĂNG NHẬP</Titile>
-          <Form>
-            <Input placeholder="Email / Tài khoản" />
-            <Input placeholder="Mật khẩu" />
-            <Button>ĐĂNG NHẬP</Button>
+          {error &&
+            <div className="alert alert-danger">
+              {error}
+            </div>
+          }
+          <Form onSubmit={handleLogin}>
+            <Input type="email" placeholder="Email / Tài khoản" id="Login-email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            <Input placeholder="Mật khẩu" type="password" id="login-password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <Button type="submit" >ĐĂNG NHẬP</Button>
             <StyledLink>Quên mật khẩu?</StyledLink>
             <StyledLink to="/register">Tạo tài khoản</StyledLink>
           </Form>

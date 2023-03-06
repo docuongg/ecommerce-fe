@@ -1,10 +1,10 @@
 import React from 'react'
 import Announcement from '../components/Announcement'
-import Categories from '../components/Categories'
+import Collections from '../components/Collections'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import Newsletter from '../components/Newsletter'
-import Products from '../components/Products'
+import Categories from '../components/Categories'
 import Slider from '../components/Slider'
 
 export default function Home() {
@@ -13,8 +13,8 @@ export default function Home() {
 		<Announcement />
 		<Navbar />
 		<Slider />
+		<Collections />
 		<Categories />
-		<Products />
 		<Newsletter />
 		<Footer />
 	</div>

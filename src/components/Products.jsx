@@ -11,10 +11,10 @@ const Container = styled.div`
 	${mobile({padding: '0'})}
 `
 
-export default function Products() {
+export default function Products( {products} ) {
   return (
 	<Container>
-		{popularProducts.map(item => (
+		{products.map(item => (
 			<Product key={item.id} item={item} />
 		))}
 	</Container>

@@ -4,6 +4,9 @@ import {
   ShoppingCartOutlined,
 } from "@mui/icons-material";
 import styled from "styled-components";
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux"
+import { setCategories, setSelectedCategory } from '../features/category/categorySlice'
 
 const Info = styled.div`
   opacity: 0;
@@ -63,21 +66,32 @@ const Icon = styled.div`
   }
 `;
 
-export default function Product({ item }) {
+export default function Category({ category }) {
+  const dispatch = useDispatch();
+
+  const handleCategoryClick = () => {
+    // Chọn một category và lưu vào state
+    dispatch(setSelectedCategory(category));
+  };
+
   return (
     <Container>
-      <Image src={item.thumbnail_url} />
-      <Info>
-        <Icon>
-          <ShoppingCartOutlined />
-        </Icon>
-        <Icon>
-          <SearchOutlined />
-        </Icon>
-        <Icon>
-          <FavoriteBorderOutlined />
-        </Icon>
-      </Info>
+      <Image src={category.thumbnail_url} />
+      <Link to = {`categories/${category.id}`}>
+        <Info onClick={handleCategoryClick}>
+          
+            <Icon>
+              <ShoppingCartOutlined />
+            </Icon>
+            <Icon>
+              <SearchOutlined />
+            </Icon>
+            <Icon>
+              <FavoriteBorderOutlined />
+            </Icon>
+          
+        </Info>
+        </Link>
     </Container>
   );
 }

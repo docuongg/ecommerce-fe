@@ -1,9 +1,15 @@
+import LogoutIcon from '@mui/icons-material/Logout';
 import { Search, ShoppingCartOutlined } from "@mui/icons-material";
 import { Badge } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import { mobile } from "../responsive";
 import styled, { css } from "styled-components";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch} from 'react-redux';
+import { useNavigate } from "react-router-dom";
+import { logout } from '../features/auth/authAPI'
+import { logoutSuccess, logoutFailure } from "../features/auth/authSlice";
 
 const Container = styled.div`
   height: 60px;
@@ -79,6 +85,30 @@ const linkStyle = {
 }
 
 export default function Navbar() {
+  const selectorStatus = useSelector((state) => state.auth.isLoggedIn);
+  const selectorUser = useSelector((state) => state.auth.user);
+  const [isLoggedIn, setIsLoggedIn] = useState(selectorStatus)
+  const [user, setUser] = useState(selectorUser)
+  const dispatch = useDispatch();
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsLoggedIn(selectorStatus)
+    setUser(selectorUser)
+  }, [selectorStatus, selectorUser]);
+
+  const handleLogout = (event) => {
+    event.preventDefault();
+    logout()
+      .then((response) => {
+        dispatch(logoutSuccess());
+        localStorage.clear();
+        navigate("/login");
+      })
+
+  };
+
   return (
     <Container>
       <Wrapper>
@@ -90,22 +120,33 @@ export default function Navbar() {
           </SeacrhContainer>
         </Left>
         <Center>
-          <Logo><Link style={linkStyle} to='/'>BILUXURY</Link></Logo>
+          <Logo><Link style={linkStyle} to='/'>FASHION STORE</Link></Logo>
         </Center>
         <Right>
-          <MenuItem>
-            <Link style={linkStyle} to="/login">Đăng nhập</Link>
-          </MenuItem>
-          <MenuItem>
-            <Link style={linkStyle} to="/register">Đăng ký</Link>
-          </MenuItem>
-          <MenuItem>
-            <Badge badgeContent={4} color="primary">
-              <Link to='/cart' style={linkStyle}>
-                <ShoppingCartOutlined />
-              </Link>
-            </Badge>
-          </MenuItem>
+          {isLoggedIn ? (
+            <>
+              <h4>{user.user_name || user.email}</h4>
+              <MenuItem>
+                <Badge badgeContent={4} color="primary">
+                  <Link to='/cart' style={linkStyle}>
+                    <ShoppingCartOutlined />
+                  </Link>
+                </Badge>
+              </MenuItem>
+              <MenuItem>
+                <Link style={linkStyle} to="" onClick = {handleLogout}><LogoutIcon/></Link>
+              </MenuItem>
+            </>
+          ) : (
+            <>
+              <MenuItem>
+                <Link style={linkStyle} to="/login">Đăng nhập</Link>
+              </MenuItem>
+              <MenuItem>
+                <Link style={linkStyle} to="/register">Đăng ký</Link>
+              </MenuItem>
+            </>
+          )}
         </Right>
       </Wrapper>
     </Container>
