@@ -1,11 +1,15 @@
 import { Add, Remove } from "@mui/icons-material";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { carts } from "../data";
 import { mobile } from "../responsive";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart, addToCart, remove, decrease, increase, toggleAmount, loading, displayItems } from "../features/order/orderSlice";
+import { display } from "@mui/system";
+import { create } from "../features/order/orderAPI"
 
 const Container = styled.div``;
 
@@ -151,29 +155,40 @@ const SummaryButton = styled.button`
 
 function CartItem({item}) {
   const [amount, setAmount] = useState(item.amount)
+  const dispatch = useDispatch()
+
+  const handleIncreaseAmount = (id) => {
+    dispatch(increase(id))
+    setAmount(amount+1)
+  }
+
+  const handleDecreaseAmount = (id) => {
+    dispatch(decrease(id))
+    setAmount(amount-1)
+  }
 
   return (
     <Product>
       <ProductDetail>
-        <Image src={item.img} />
+        <Image src={item.thumbnail_url} />
         <Details>
           <ProductName>
-            <b>Product: </b>{item.product}
+            <b>Product: </b>{item.name}
           </ProductName>
           <ProductId>
             <b>ID: </b>{item.id}
           </ProductId>
-          <ProductColor color={item.color} />
+          {/* <ProductColor color={item.color} />
           <ProductSize>
             <b>Size: </b>{item.size}
-          </ProductSize>
+          </ProductSize> */}
         </Details>
       </ProductDetail>
       <PriceDetail>
         <ProductAmountContainer>
-          <Remove style={{cursor: 'pointer'}} onClick={() => {amount > 0 ? setAmount(amount-1) : setAmount(0)}} />
+          <Remove style={{cursor: 'pointer'}} onClick={() => handleDecreaseAmount(item.id)} />
           <ProductAmount>{amount}</ProductAmount>
-          <Add style={{cursor: 'pointer'}} onClick={() => setAmount(amount+1)}/>
+          <Add style={{cursor: 'pointer'}} onClick={() => handleIncreaseAmount(item.id)}/>
         </ProductAmountContainer>
         <ProductPrice>$ {item.price * amount}</ProductPrice>
       </PriceDetail>
@@ -182,15 +197,33 @@ function CartItem({item}) {
 }
 
 export default function Cart() {
+  const dispatch = useDispatch();
+
+
+  const userId = useSelector(state => state.auth.user.id)
+  const selectorOrder = useSelector(state => state.order.cart);
+  const [order, setOrder] = useState(selectorOrder)
+
+  useEffect(() => {
+    setOrder(selectorOrder)
+  }, [selectorOrder]);
+
+  const handlePayment = () => {
+    create(userId, order)
+      .then((response) => {
+        console.log(response.data)
+      })
+  }
+
   return (
     <>
       <Navbar />
       <Container>
         <Wrapper>
-          <Title>GIỎ HÀNG</Title>
+          <Title>MY CART</Title>
           <Top>
-            <Link to="/productlist">
-              <TopButton>Tiếp tục mua sắm</TopButton>
+            <Link>
+              <TopButton onClick={() => dispatch(clearCart())}>Lam moi gio hang</TopButton>
             </Link>
             <TopTexts>
               <TopText>Shopping Bag(2)</TopText>
@@ -200,7 +233,7 @@ export default function Cart() {
           </Top>
           <Bottom>
             <Info>
-              {carts.map((item, index) => (
+              {order.map((item, index) => (
                 <CartItem key={index} item={item} />
               ))}
             </Info>
@@ -222,7 +255,7 @@ export default function Cart() {
                 <SummaryItemText>Tổng thanh toán</SummaryItemText>
                 <SummaryItemPrice>$ 465</SummaryItemPrice>
               </SummaryItem>
-              <SummaryButton>Thanh toán ngay</SummaryButton>
+              <SummaryButton onClick={handlePayment}>Thanh toán ngay</SummaryButton>
             </Summary>
           </Bottom>
         </Wrapper>

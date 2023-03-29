@@ -53,7 +53,7 @@ export default function ProductCategory() {
         dispatch(setProductsByCategory(response.data));
       })
     window.scrollTo(0, 0);
-  }, [id]);
+  }, [id, dispatch]);
 
   return (
     <>
