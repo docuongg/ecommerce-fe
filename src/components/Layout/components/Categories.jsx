@@ -1,10 +1,11 @@
 import styled from "styled-components"
-import { mobile } from "../responsive"
-import Category from "./Category"
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
-import { index } from '../features/category/categoryAPI'
-import { setCategories } from '../features/category/categorySlice'
+
+import Category from "./Category"
+import { index } from '../../../features/api/categoryAPI'
+import { mobile } from "../../../responsive"
+import { setCategories } from '../../../features/slice/categorySlice'
 
 const Container = styled.div`
 	padding: 20px;

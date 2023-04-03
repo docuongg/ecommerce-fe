@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import { popularProducts } from '../data'
-import { mobile } from "../responsive"
+
+import { mobile } from "../../../responsive"
 import Product from "./Product"
 
 const Container = styled.div`

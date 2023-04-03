@@ -1,7 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit'
-import authReducer from '../features/auth/authSlice'
-import categoryReducer from '../features/category/categorySlice'
-import orderReducer from '../features/order/orderSlice'
+import authReducer from '../features/slice/authSlice'
+import categoryReducer from '../features/slice/categorySlice'
+import orderReducer from '../features/slice/orderSlice'
 
 const rootReducer = combineReducers({
   auth: authReducer,

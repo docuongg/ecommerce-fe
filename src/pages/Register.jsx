@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login, register } from "../features/auth/authAPI"
+import { login, register } from "../features/api/authAPI"
 import { useDispatch } from 'react-redux';
-import { loginStart, loginFailure, loginSuccess } from '../features/auth/authSlice';
+import { loginStart, loginFailure, loginSuccess } from '../features/slice/authSlice';
 
 const Container = styled.div`
   width: 100vw;
@@ -102,7 +101,6 @@ export default function Register() {
 
   return (
     <>
-      <Navbar />
       <Container>
         <Wrapper>
           <Titile>TẠO TÀI KHOẢN</Titile>

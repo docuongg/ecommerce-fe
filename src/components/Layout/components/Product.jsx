@@ -4,9 +4,9 @@ import {
   ShoppingCartOutlined,
 } from "@mui/icons-material";
 import styled from "styled-components";
-import { BrowserRouter as Router, Link } from 'react-router-dom';
-import { useSelector, useDispatch } from "react-redux"
-import { setSelectedCategory } from '../features/category/categorySlice'
+import { useDispatch, useSelector } from "react-redux";
+
+import { addProductToCart } from "../../../features/slice/orderSlice"
 
 const Info = styled.div`
   opacity: 0;
@@ -66,36 +66,32 @@ const Icon = styled.div`
   }
 `;
 
-const Text = styled.h3`
-  color: #fff
-`
-
-export default function Category({ category }) {
-  const dispatch = useDispatch();
-
-  const handleCategoryClick = () => {
-    // Chọn một category và lưu vào state
-    dispatch(setSelectedCategory(category));
-  };
+export default function Product({ item }) {
+  const dispatch = useDispatch()
+  
+  const addToCart = (product) => {
+    // let storedProducts = localStorage.getItem('items')
+    // const products = JSON.parse(storedProducts) || [];
+    product = { ...product, amount: 1}
+    // products.push(item)
+    // localStorage.setItem("items", JSON.stringify(products));
+    dispatch(addProductToCart(product))
+  }
 
   return (
     <Container>
-      <Image src={category.thumbnail_url} />
-      <Link to = {`categories/${category.id}`}>
-        <Info onClick={handleCategoryClick}>
-          {/* <Icon>
-            <ShoppingCartOutlined />
-          </Icon>
-          <Icon>
-            <SearchOutlined />
-          </Icon>
-          <Icon>
-            <FavoriteBorderOutlined />
-          </Icon> */}
-          <Text>{category.name}</Text>
-          
-        </Info>
-      </Link>
+      <Image src={item.thumbnail_url} />
+      <Info>
+        <Icon>
+          <ShoppingCartOutlined onClick={() => addToCart(item)}/>
+        </Icon>
+        <Icon>
+          <SearchOutlined />
+        </Icon>
+        <Icon>
+          <FavoriteBorderOutlined />
+        </Icon>
+      </Info>
     </Container>
   );
 }

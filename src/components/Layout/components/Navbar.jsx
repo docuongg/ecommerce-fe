@@ -3,14 +3,14 @@ import { Search, ShoppingCartOutlined } from "@mui/icons-material";
 import { Badge } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-import { mobile } from "../responsive";
+import { mobile } from "../../../responsive";
 import styled, { css } from "styled-components";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch} from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { logout } from '../features/auth/authAPI'
-import { logoutSuccess, logoutFailure } from "../features/auth/authSlice";
-import { amount } from "../features/order/orderSlice"
+import { logout } from '../../../features/api/authAPI'
+import { logoutSuccess, logoutFailure } from "../../../features/slice/authSlice";
+import { amount } from "../../../features/slice/orderSlice"
 
 const Container = styled.div`
   height: 60px;

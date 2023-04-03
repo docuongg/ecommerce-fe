@@ -2,14 +2,11 @@ import { Add, Remove } from "@mui/icons-material";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
-import { carts } from "../data";
 import { mobile } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart, addToCart, remove, decrease, increase, toggleAmount, loading, displayItems } from "../features/order/orderSlice";
-import { display } from "@mui/system";
-import { create } from "../features/order/orderAPI"
+
+import { clearCart, addToCart, remove, decrease, increase, toggleAmount, loading, displayItems } from "../features/slice/orderSlice";
+import { create } from "../features/api/orderAPI"
 
 const Container = styled.div``;
 
@@ -217,7 +214,6 @@ export default function Cart() {
 
   return (
     <>
-      <Navbar />
       <Container>
         <Wrapper>
           <Title>MY CART</Title>
@@ -260,7 +256,6 @@ export default function Cart() {
           </Bottom>
         </Wrapper>
       </Container>
-      <Footer />
     </>
   );
 }

@@ -1,13 +1,10 @@
 import styled from "styled-components";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
-import Newsletter from "../components/Newsletter";
-import Products from "../components/Products";
+import { Products } from "../components/Layout/components";
 import { useParams } from "react-router-dom";
-import { index } from "../features/product/productAPI"
+import { index } from "../features/api/productAPI"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { setProductsByCategory } from "../features/category/categorySlice";
+import { setProductsByCategory } from "../features/slice/categorySlice";
 
 const Container = styled.div``;
 
@@ -57,7 +54,6 @@ export default function ProductCategory() {
 
   return (
     <>
-      <Navbar />
       <Container>
         <Title>{selectedCategory.name}</Title>
         <FilterContainer>
@@ -97,9 +93,7 @@ export default function ProductCategory() {
           </Filter>
         </FilterContainer>
         <Products products = {products}/>
-        <Newsletter />
       </Container>
-      <Footer />
     </>
   );
 }

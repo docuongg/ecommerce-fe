@@ -1,0 +1,5 @@
+export { default as authAPI } from './authAPI'
+export { default as categoryAPI } from './categoryAPI'
+export { default as collectionAPI } from './collectionAPI'
+export { default as orderAPI } from './orderAPI'
+export { default as productAPI } from './prodcutAPI'
