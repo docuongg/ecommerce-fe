@@ -21,7 +21,7 @@ const orderSlice = createSlice({
         }
         return cartItem
       })
-      state.cart = [ ...state.cart, action.payload ]
+      state.cart = JSON.stringify(tempCart) !== JSON.stringify(state.cart) ? tempCart : [ ...state.cart, action.payload ]
       state.amount = state.amount + 1
     },
     remove: (state, action) => {
