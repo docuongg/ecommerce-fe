@@ -1,24 +1,38 @@
-import ProductCategory from "./pages/ProductCategory";
-import Home from "./pages/Home";
-import Product from "./pages/Product";
-import Register from "./pages/Register";
-import Login from "./pages/Login";
-import Cart from "./pages/Cart";
-import React from 'react'
+import React, { Fragment }from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { publicRoutes } from './routes';
+import { DefaultLayout } from './components/Layout';
 
 function App() {
 
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/categories/:id" element={<ProductCategory />} />
-      </Routes>
+      <div className="App">
+        <Routes>
+          { publicRoutes.map((route, index) => {
+              const Page = route.component;
+
+              let Layout = DefaultLayout
+
+              if (route.layout) {
+                Layout = route.layout
+              } else if (route.layout === null) {
+                Layout = Fragment
+              }
+
+              return ( 
+                <Route key={index} 
+                  path={route.path} 
+                  element={
+                    <Layout>
+                      <Page />
+                    </Layout>
+                  }
+                />
+              )
+          })}
+        </Routes>
+      </div>
     </Router>
   );
 }

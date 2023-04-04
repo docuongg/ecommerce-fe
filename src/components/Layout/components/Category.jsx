@@ -6,7 +6,8 @@ import {
 import styled from "styled-components";
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux"
-import { setCategories, setSelectedCategory } from '../features/category/categorySlice'
+
+import { setSelectedCategory } from '../../../features/slice/categorySlice'
 
 const Info = styled.div`
   opacity: 0;
@@ -66,6 +67,10 @@ const Icon = styled.div`
   }
 `;
 
+const Text = styled.h3`
+  color: #fff
+`
+
 export default function Category({ category }) {
   const dispatch = useDispatch();
 
@@ -79,19 +84,19 @@ export default function Category({ category }) {
       <Image src={category.thumbnail_url} />
       <Link to = {`categories/${category.id}`}>
         <Info onClick={handleCategoryClick}>
-          
-            <Icon>
-              <ShoppingCartOutlined />
-            </Icon>
-            <Icon>
-              <SearchOutlined />
-            </Icon>
-            <Icon>
-              <FavoriteBorderOutlined />
-            </Icon>
+          {/* <Icon>
+            <ShoppingCartOutlined />
+          </Icon>
+          <Icon>
+            <SearchOutlined />
+          </Icon>
+          <Icon>
+            <FavoriteBorderOutlined />
+          </Icon> */}
+          <Text>{category.name}</Text>
           
         </Info>
-        </Link>
+      </Link>
     </Container>
   );
 }

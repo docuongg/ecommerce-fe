@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
-import Navbar from "../components/Navbar";
-import { mobile } from "../responsive";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
-import { loginStart, loginFailure, loginSuccess } from '../features/auth/authSlice';
-import { login } from '../features/auth/authAPI'
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
+
+import { mobile } from "../responsive";
+import { loginStart, loginFailure, loginSuccess } from '../features/slice/authSlice';
+import { login } from '../features/api/authAPI'
 
 const Container = styled.div`
   width: 100vw;
@@ -104,7 +106,6 @@ export default function Login() {
 
   return (
     <>
-      <Navbar />
       <Container>
         <Wrapper>
           <Titile>ĐĂNG NHẬP</Titile>
@@ -119,7 +120,19 @@ export default function Login() {
             <Button type="submit" >ĐĂNG NHẬP</Button>
             <StyledLink>Quên mật khẩu?</StyledLink>
             <StyledLink to="/register">Tạo tài khoản</StyledLink>
+            
+            <GoogleLogin
+              onSuccess={credentialResponse => {
+                console.log(credentialResponse.credential);
+                var decode = jwt_decode(credentialResponse.credential)
+                console.log(decode)
+              }}
+              onError={() => {
+                console.log('Login Failed');
+              }}
+            />
           </Form>
+          
         </Wrapper>
       </Container>
     </>

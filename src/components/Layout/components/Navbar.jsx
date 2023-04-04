@@ -3,13 +3,14 @@ import { Search, ShoppingCartOutlined } from "@mui/icons-material";
 import { Badge } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-import { mobile } from "../responsive";
+import { mobile } from "../../../responsive";
 import styled, { css } from "styled-components";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch} from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { logout } from '../features/auth/authAPI'
-import { logoutSuccess, logoutFailure } from "../features/auth/authSlice";
+import { logout } from '../../../features/api/authAPI'
+import { logoutSuccess, logoutFailure } from "../../../features/slice/authSlice";
+import { amount } from "../../../features/slice/orderSlice"
 
 const Container = styled.div`
   height: 60px;
@@ -87,8 +88,10 @@ const linkStyle = {
 export default function Navbar() {
   const selectorStatus = useSelector((state) => state.auth.isLoggedIn);
   const selectorUser = useSelector((state) => state.auth.user);
+  const selectorAmount = useSelector((state) => state.order.amount);
   const [isLoggedIn, setIsLoggedIn] = useState(selectorStatus)
   const [user, setUser] = useState(selectorUser)
+  const [amount, setAmount] = useState(selectorAmount)
   const dispatch = useDispatch();
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -96,7 +99,8 @@ export default function Navbar() {
   useEffect(() => {
     setIsLoggedIn(selectorStatus)
     setUser(selectorUser)
-  }, [selectorStatus, selectorUser]);
+    setAmount(selectorAmount)
+  }, [selectorStatus, selectorUser, selectorAmount]);
 
   const handleLogout = (event) => {
     event.preventDefault();
@@ -106,7 +110,6 @@ export default function Navbar() {
         localStorage.clear();
         navigate("/login");
       })
-
   };
 
   return (
@@ -127,7 +130,7 @@ export default function Navbar() {
             <>
               <h4>{user.user_name || user.email}</h4>
               <MenuItem>
-                <Badge badgeContent={4} color="primary">
+                <Badge badgeContent={amount} color="primary">
                   <Link to='/cart' style={linkStyle}>
                     <ShoppingCartOutlined />
                   </Link>

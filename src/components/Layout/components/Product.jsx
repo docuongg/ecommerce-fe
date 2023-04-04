@@ -4,6 +4,9 @@ import {
   ShoppingCartOutlined,
 } from "@mui/icons-material";
 import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+
+import { addProductToCart } from "../../../features/slice/orderSlice"
 
 const Info = styled.div`
   opacity: 0;
@@ -64,12 +67,23 @@ const Icon = styled.div`
 `;
 
 export default function Product({ item }) {
+  const dispatch = useDispatch()
+  
+  const addToCart = (product) => {
+    // let storedProducts = localStorage.getItem('items')
+    // const products = JSON.parse(storedProducts) || [];
+    product = { ...product, amount: 1}
+    // products.push(item)
+    // localStorage.setItem("items", JSON.stringify(products));
+    dispatch(addProductToCart(product))
+  }
+
   return (
     <Container>
       <Image src={item.thumbnail_url} />
       <Info>
         <Icon>
-          <ShoppingCartOutlined />
+          <ShoppingCartOutlined onClick={() => addToCart(item)}/>
         </Icon>
         <Icon>
           <SearchOutlined />

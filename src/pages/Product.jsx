@@ -1,9 +1,5 @@
 import { Add, Remove } from "@mui/icons-material";
 import styled from "styled-components";
-import Announcement from "../components/Announcement";
-import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
-import Newsletter from "../components/Newsletter";
 
 const Container = styled.div``;
 
@@ -109,7 +105,6 @@ const Button = styled.button`
 export default function Product() {
   return (
     <>
-      <Navbar />
       <Container>
         <Wreapper>
           <ImgContainer>
@@ -153,7 +148,6 @@ export default function Product() {
           </InfoContainer>
         </Wreapper>
       </Container>
-      <Footer />
     </>
   );
 }
