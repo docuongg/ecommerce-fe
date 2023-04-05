@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux"
 
-import { setSelectedCategory } from '../../../features/slice/categorySlice'
+import { setSelectedCategory } from '~/features/slice/categorySlice'
 
 const Info = styled.div`
   opacity: 0;

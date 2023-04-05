@@ -15,7 +15,7 @@ root.render(
         <GlobalStyle />
           <GoogleOAuthProvider clientId="454236063133-c1qb8rbrgnnr1bpm4khqhlq3oci5v8m7.apps.googleusercontent.com">
             <App />
-          </GoogleOAuthProvider>;
+          </GoogleOAuthProvider>
       </PersistGate>
     </Provider>
   </React.StrictMode>

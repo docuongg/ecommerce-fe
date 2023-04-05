@@ -1,4 +1,4 @@
-import { Navbar, Footer, Announcement, Newsletter } from '../components'
+import { Navbar, Footer, Announcement, Newsletter } from '../components/user'
 
 function DefaultLayout({ children }) {
   return ( 

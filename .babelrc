@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    ["module-resolver", {
+      "alias": {
+        "~": "./src"
+      },
+      "extensions": [".js", ".jsx", ".es", ".es6", ".mjs"]
+    }]
+  ]
+}

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Products } from "../components/Layout/components";
+import { Products } from "../components/Layout/components/user";
 import { useParams } from "react-router-dom";
 import { index } from "../features/api/productAPI"
 import { useDispatch, useSelector } from "react-redux";

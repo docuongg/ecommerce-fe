@@ -4,6 +4,9 @@ import Cart from "../pages/Cart"
 import Register from "../pages/Register"
 import ProductCategory from "../pages/ProductCategory"
 import Product from "../pages/Product"
+import DashBoard from "../pages/DashBoard"
+
+import { ManagerLayout } from "../components/Layout"
 
 const publicRoutes = [
   { path: "/", component: Home },
@@ -11,7 +14,8 @@ const publicRoutes = [
   { path: "/register", component: Register },
   { path: "/cart", component: Cart },
   { path: "/categories/:id", component: ProductCategory },
-  { path: "/product", component: Product }
+  { path: "/product", component: Product },
+  { path: "/dashboard", component: DashBoard, layout: ManagerLayout }
 ]
 
 const privateRoutes = [
