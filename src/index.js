@@ -6,6 +6,9 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './app/store'
 import { GlobalStyle } from './components/GlobalStyles'
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { ProSidebarProvider } from 'react-pro-sidebar';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,7 +17,9 @@ root.render(
       <PersistGate Loading={null} persistor={persistor}>
         <GlobalStyle />
           <GoogleOAuthProvider clientId="454236063133-c1qb8rbrgnnr1bpm4khqhlq3oci5v8m7.apps.googleusercontent.com">
-            <App />
+            <ProSidebarProvider>
+              <App />
+            </ProSidebarProvider>
           </GoogleOAuthProvider>
       </PersistGate>
     </Provider>
