@@ -14,6 +14,7 @@ const Container = styled.div`
     background-color:#aaa;
   };
   background-color: #EDE7F6;
+  cursor:pointer;
 `
 
 const ProfileIconDiv = styled.div`

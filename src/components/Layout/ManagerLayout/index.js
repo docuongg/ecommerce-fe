@@ -9,8 +9,8 @@ const ParentContainer = styled.div`
 const ChildContainer = styled.div`
   flex: 1;
   background-color: #EEF2F6;
-  border-radius: 10px;
-  margin: 0 30px;
+  border-radius: 16px;
+  margin-right: 30px;
 `
 
 function ManagerLayout({ children }) {

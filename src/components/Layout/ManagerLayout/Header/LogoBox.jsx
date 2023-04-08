@@ -6,7 +6,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   width: 240px;
-  position: relative
+  position: relative;
 `
 
 const LogoDiv = styled.div`
@@ -33,6 +33,7 @@ const IconDiv = styled.div`
     background-color:#aaa;
 	};
   background-color: #EDE7F6;
+  cursor: pointer
 `
 
 function LogoBox() {

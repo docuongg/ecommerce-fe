@@ -1,5 +1,12 @@
 import React, { useState } from "react";
+import styled from "styled-components"
 import ReactApexChart from "react-apexcharts";
+
+const Container = styled.div`
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 18px;
+`
 
 function LineChart() {
   const [chartData, setChartData] = useState({
@@ -20,7 +27,9 @@ function LineChart() {
   });
 
   return (
-    <ReactApexChart options={chartData.options} series={chartData.series} type="bar" height={350} />
+    <Container>
+      <ReactApexChart options={chartData.options} series={chartData.series} type="line" height={480} />
+    </Container>
   );
 };
 

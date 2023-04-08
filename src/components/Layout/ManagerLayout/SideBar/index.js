@@ -5,7 +5,7 @@ import LineAxisOutlinedIcon from '@mui/icons-material/LineAxisOutlined';
 function SideBar() {
 
   return ( 
-    <div style={{ display: 'flex', height: '90vh', minHeight: '400px', maxWidth: '12vw'}}>
+    <div style={{ display: 'flex', height: '90vh', maxWidth: '16vw'}}>
       <Sidebar backgroundColor="#fff">
         <Menu transitionDuration={700}>
           <SubMenu label="Dashboard" icon={<LineAxisOutlinedIcon/>}>
