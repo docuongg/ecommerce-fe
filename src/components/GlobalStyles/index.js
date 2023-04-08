@@ -1,12 +1,16 @@
 import { createGlobalStyle } from 'styled-components';
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
     outline: 0;
-    text-decoration: none;
     box-sizing: border-box;
+  }
+
+  a {
+    text-decoration: none;
+    color: #000
   }
 
   body {
