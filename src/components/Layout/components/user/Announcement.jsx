@@ -1,7 +1,7 @@
 import { Clear } from "@mui/icons-material"
 import { useState } from "react"
 import styled from "styled-components"
-import { mobile } from "../../../responsive"
+import { mobile } from "~/responsive"
 
 const Content = styled.div`
 	height: 40px;

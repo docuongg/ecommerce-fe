@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from "react-redux"
 import { useEffect } from "react"
 
 import Category from "./Category"
-import { index } from '../../../features/api/categoryAPI'
-import { mobile } from "../../../responsive"
-import { setCategories } from '../../../features/slice/categorySlice'
+import { index } from '~/features/api/categoryAPI'
+import { mobile } from "~/responsive"
+import { setCategories } from '~/features/slice/categorySlice'
 
 const Container = styled.div`
 	padding: 20px;
