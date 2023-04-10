@@ -1,5 +1,12 @@
 import styled from "styled-components";
 import { EnhancedTable } from "~/components/components/table";
+import { useSelector, useDispatch } from "react-redux";
+import { destroy, index } from "~/features/api/categoryAPI"
+import { useState, useEffect } from "react";
+import EditModal from "./EditModal";
+import AddModal from "./AddModal"
+
+import { setCategories, delCategories } from "~/features/slice/categorySlice";
 
 const RowContainer = styled.div`
   display: flex;
@@ -15,11 +22,55 @@ const ColContainer = styled.div`
 `
 
 function Category() {
-  return (  
+
+  const headCells = [
+    {
+      id: 'id',
+      numeric: false,
+      disablePadding: true,
+      label: 'ID',
+    },
+    {
+      id: 'name',
+      numeric: true,
+      disablePadding: false,
+      label: 'Name',
+    },
+    {
+      id: 'thumbnail_url',
+      numeric: true,
+      disablePadding: false,
+      label: 'Thumbnail_URL',
+    }
+  ];
+
+  const dispatch = useDispatch();
+   
+  const categories = useSelector(state => state.category.categories)
+  const [category, setCategory] = useState(categories)
+  
+  useEffect(() => {
+    index()
+    .then(response => {
+      setCategory(response.data)
+      dispatch(setCategories(response.data));
+    });
+  }, [categories.length])
+
+  const handleDelButton = (ids) => {
+    ids.forEach((id) => {
+      destroy(id)
+        .then((response) => {
+          dispatch(delCategories(id))
+        })
+    })
+  }
+
+  return ( 
     <div>
       <RowContainer>
         <ColContainer>
-          <EnhancedTable/>
+          <EnhancedTable rows={category} headCells={headCells} title={'Category'} clickDel={handleDelButton} EditButton={EditModal } AddButton={AddModal} />
         </ColContainer>
       </RowContainer>
     </div>
