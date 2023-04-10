@@ -1,5 +1,4 @@
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import LineAxisOutlinedIcon from '@mui/icons-material/LineAxisOutlined';
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
@@ -26,7 +25,11 @@ function SideBar() {
               Category
             </MenuItem>
           </Link>
-          <MenuItem icon={<Inventory2OutlinedIcon/>}> Product </MenuItem>
+          <Link to = "/manager/product">
+            <MenuItem icon={<Inventory2OutlinedIcon/>}> 
+              Product 
+            </MenuItem>
+          </Link>
           <MenuItem icon={<AccountCircleOutlinedIcon/>}> Employee </MenuItem>
         </Menu>
       </Sidebar>
