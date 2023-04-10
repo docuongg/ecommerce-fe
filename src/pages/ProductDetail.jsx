@@ -102,7 +102,7 @@ const Button = styled.button`
   }
 `;
 
-export default function Product() {
+export default function ProductDetail() {
   return (
     <>
       <Container>

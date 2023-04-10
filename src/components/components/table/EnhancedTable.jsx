@@ -58,7 +58,7 @@ const DEFAULT_ORDER_BY = 'id';
 const DEFAULT_ROWS_PER_PAGE = 10;
 
 function EnhancedTableToolbar(props) {
-  const { numSelected, AddButton } = props;
+  const { numSelected, AddButton, attach } = props;
 
   return (
     <Toolbar
@@ -106,7 +106,7 @@ function EnhancedTableToolbar(props) {
       ) : (
         <Tooltip title="Add">
           <IconButton>
-            <AddButton />
+            <AddButton attach = {attach}/>
           </IconButton>
         </Tooltip>
       )}
@@ -124,7 +124,7 @@ const Container = styled.div`
   border-radius: 18px;
 `
 
-export default function EnhancedTable({ rows, headCells, title, clickDel, EditButton, AddButton }) {
+export default function EnhancedTable({ rows, attach, headCells, title, clickDel, EditButton, AddButton }) {
   const [order, setOrder] = React.useState(DEFAULT_ORDER);
   const [orderBy, setOrderBy] = React.useState(DEFAULT_ORDER_BY);
   const [selected, setSelected] = React.useState([]);
@@ -316,7 +316,7 @@ export default function EnhancedTable({ rows, headCells, title, clickDel, EditBu
     <Container>
       <Box sx={{ width: '100%' }}>
         <Paper sx={{ width: '100%', mb: 2 }}>
-          <EnhancedTableToolbar numSelected={selected.length} title={title} handleDelButton={clickDel} idsSelected={selected} resetSelected={resetSelected} AddButton={AddButton} />
+          <EnhancedTableToolbar numSelected={selected.length} title={title} handleDelButton={clickDel} idsSelected={selected} resetSelected={resetSelected} AddButton={AddButton} attach={attach}/>
           <TableContainer>
             <Table
               sx={{ minWidth: 750 }}
@@ -365,11 +365,17 @@ export default function EnhancedTable({ rows, headCells, title, clickDel, EditBu
                           >
                             {row.id}
                           </TableCell>
-                          <TableCell align="right">{row.name}</TableCell>
-                          <TableCell align="right">{row.thumbnail_url}</TableCell>
-                          <TableCell align="right">{row.carbs}</TableCell>
+                          {
+                            headCells.map((headCell) => {
+                              if ( headCell.id != 'id' ) {
+                                return (
+                                  <TableCell align="right">{row[headCell.id]}</TableCell>
+                                )
+                              }
+                            })
+                          }
                           <TableCell align="right">
-                            <EditButton item={row}/>
+                            <EditButton item={row} attach={attach} />
                           </TableCell>
                         </TableRow>
                       );
