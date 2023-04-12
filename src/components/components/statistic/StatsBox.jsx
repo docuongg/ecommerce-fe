@@ -4,7 +4,7 @@ import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlin
 const Container = styled.div`
   background-color: #673AB7;
   border-radius: 18px;
-  padding: 18px 28px;
+  padding: 18px 24px;
   color: #fff;
   display: flex;
   justify-content: space-between;
@@ -21,7 +21,7 @@ const Title = styled.div`
 `
 
 const Stats = styled.div`
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 800;
   flex: 1;
 `
@@ -36,22 +36,23 @@ const IconDiv = styled.div`
   align-items: center;
 `
 
-function StatsBox() {
+function StatsBox({ title, stats, description, Icon }) {
+
   return (  
     <Container>
       <Content>
         <Title>
-          Revenue
+          { title }
         </Title>
         <Stats>
-          50055$
+          { stats }
         </Stats>
         <Description>
-          42934$ Last Month
+          { description }
         </Description>
       </Content>
       <IconDiv>
-        <MonetizationOnOutlinedIcon sx={{ fontSize: 108 }}/>
+        { Icon }
       </IconDiv>
     </Container>
   );
