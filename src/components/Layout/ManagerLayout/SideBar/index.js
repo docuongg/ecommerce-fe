@@ -5,6 +5,7 @@ import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
 import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
+import LeaderboardOutlinedIcon from '@mui/icons-material/LeaderboardOutlined';
 
 function SideBar() {
 
@@ -13,12 +14,18 @@ function SideBar() {
       <Sidebar backgroundColor="#fff">
         <Menu transitionDuration={700}>
           <SubMenu label="Dashboard" icon={<LineAxisOutlinedIcon/>}>
-            <Link to = "/dashboard">
-              <MenuItem icon={<MonetizationOnOutlinedIcon/>}>
-                Income
-              </MenuItem>
-            </Link>
-            <MenuItem> Product </MenuItem>
+            <ul>
+              <Link to = "/dashboard/income">
+                <MenuItem icon={<MonetizationOnOutlinedIcon/>}>
+                  Income
+                </MenuItem>
+              </Link>
+              <Link to = "/dashboard/product">
+                <MenuItem icon={<LeaderboardOutlinedIcon/>}>
+                  Product
+                </MenuItem>
+              </Link>
+            </ul>
           </SubMenu>
           <Link to = "/manager/category">
             <MenuItem icon={<CategoryOutlinedIcon/>}>
