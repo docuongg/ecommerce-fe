@@ -119,11 +119,14 @@ export default function OrderManager() {
             text: "Total Income and Total Orders",
             align: "center",
             style: {
-              fontSize: "20px",
+              fontSize: "18px",
             },
           },
           xaxis: {
             tickAmount: 10
+          },
+          stroke: {
+            curve: 'smooth'
           },
           yaxis: [
             {

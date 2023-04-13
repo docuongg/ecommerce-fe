@@ -6,10 +6,8 @@ import ProductCategory from "../pages/ProductCategory"
 import ProductDetail from "../pages/ProductDetail"
 
 import { ManagerLayout } from "../components/Layout"
-import { OrderManager as AnalystOrder } from "~/pages/management/Analyst"
-import { Category } from "~/pages/management"
-import { ProductManager } from "~/pages/management"
-
+import { OrderManager as AnalystOrder, ProductManager as AnalystProduct } from "~/pages/management/Analyst"
+import { CategoryManager, ProductManager } from "~/pages/management"
 
 const publicRoutes = [
   { path: "/", component: Home },
@@ -19,7 +17,8 @@ const publicRoutes = [
   { path: "/categories/:id", component: ProductCategory },
   { path: "/product", component: ProductDetail },
   { path: "/dashboard/income", component: AnalystOrder, layout: ManagerLayout },
-  { path: "/manager/category", component: Category, layout: ManagerLayout },
+  { path: "/dashboard/product", component: AnalystProduct, layout: ManagerLayout },
+  { path: "/manager/category", component: CategoryManager, layout: ManagerLayout },
   { path: "/manager/product", component: ProductManager, layout: ManagerLayout },
 ]
 

@@ -6,9 +6,20 @@ import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import LeaderboardOutlinedIcon from '@mui/icons-material/LeaderboardOutlined';
+import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { useEffect, useState } from "react";
+
+const useStyles = makeStyles({
+  active: {
+    backgroundColor: 'lightgray',
+  }
+});
 
 function SideBar() {
 
+  const classes = useStyles();
+  
   return ( 
     <div style={{ display: 'flex', height: '90vh', maxWidth: '16vw'}}>
       <Sidebar backgroundColor="#fff">
@@ -16,7 +27,7 @@ function SideBar() {
           <SubMenu label="Dashboard" icon={<LineAxisOutlinedIcon/>}>
             <ul>
               <Link to = "/dashboard/income">
-                <MenuItem icon={<MonetizationOnOutlinedIcon/>}>
+                <MenuItem className={classes.active} icon={<MonetizationOnOutlinedIcon/>}>
                   Income
                 </MenuItem>
               </Link>
