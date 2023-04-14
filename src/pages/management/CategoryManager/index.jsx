@@ -21,7 +21,7 @@ const ColContainer = styled.div`
   flex: 1;
 `
 
-function Category() {
+function CategoryManager() {
 
   const headCells = [
     {
@@ -77,4 +77,4 @@ function Category() {
   )
 }
 
-export default Category;
+export default CategoryManager;

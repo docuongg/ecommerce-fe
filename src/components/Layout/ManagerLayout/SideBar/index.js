@@ -6,6 +6,7 @@ import Inventory2OutlinedIcon from '@mui/icons-material/Inventory2Outlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import LeaderboardOutlinedIcon from '@mui/icons-material/LeaderboardOutlined';
+import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useEffect, useState } from "react";
@@ -46,6 +47,11 @@ function SideBar() {
           <Link to = "/manager/product">
             <MenuItem icon={<Inventory2OutlinedIcon/>}> 
               Product 
+            </MenuItem>
+          </Link>
+          <Link to = "/manager/order">
+            <MenuItem icon={<ListAltOutlinedIcon/>}> 
+              Order
             </MenuItem>
           </Link>
           <MenuItem icon={<AccountCircleOutlinedIcon/>}> Employee </MenuItem>

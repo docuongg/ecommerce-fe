@@ -1,5 +1,9 @@
 import axios from '../api/axios'
 
+export const index = () => {
+  return axios.get('/orders');
+};
+
 export const create = (user_id, totalPrice, products) => {
   return axios.post('/orders', {
     user_id: user_id,
@@ -12,4 +16,14 @@ export const create = (user_id, totalPrice, products) => {
       }
     })
   });
+}
+
+export const update = (id, status) => {
+  return axios.put(`/orders/${id}`, {
+    status: status
+  });
+}
+
+export const destroy = (id) => {
+  return axios.delete(`/orders/${id}`);
 }

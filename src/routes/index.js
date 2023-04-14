@@ -7,7 +7,7 @@ import ProductDetail from "../pages/ProductDetail"
 
 import { ManagerLayout } from "../components/Layout"
 import { OrderManager as AnalystOrder, ProductManager as AnalystProduct } from "~/pages/management/Analyst"
-import { CategoryManager, ProductManager } from "~/pages/management"
+import { CategoryManager, ProductManager, OrderManager } from "~/pages/management"
 
 const publicRoutes = [
   { path: "/", component: Home },
@@ -20,6 +20,7 @@ const publicRoutes = [
   { path: "/dashboard/product", component: AnalystProduct, layout: ManagerLayout },
   { path: "/manager/category", component: CategoryManager, layout: ManagerLayout },
   { path: "/manager/product", component: ProductManager, layout: ManagerLayout },
+  { path: "/manager/order", component: OrderManager, layout: ManagerLayout },
 ]
 
 const privateRoutes = [
