@@ -5,8 +5,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { destroy, index } from "~/features/api/orderAPI"
 import { useState, useEffect } from "react";
 import EditModal from "./EditModal";
-import AddModal from "./AddModal";
-import { setCategories, delCategories } from "~/features/slice/categorySlice";
+import ConfirmButton from "./ConfirmButton";
+import ShowModal from "./ShowModal"
+import { setOrders, delOrders } from "~/features/slice/orderSlice";
 import TabPanel from "./TabPill";
 // import Typography from '@mui/material/Typography';
 import { Tabs, Tab } from '@mui/material';
@@ -54,12 +55,6 @@ function OrderManager() {
       label: 'Total Price',
     },
     {
-      id: 'status',
-      numeric: true,
-      disablePadding: false,
-      label: 'Status',
-    },
-    {
       id: 'user_id',
       numeric: true,
       disablePadding: false,
@@ -69,22 +64,22 @@ function OrderManager() {
 
   const dispatch = useDispatch();
    
-  const categories = useSelector(state => state.category.categories)
-  const [category, setCategory] = useState(categories)
+  const orders = useSelector(state => state.order.orders)
+  const [order, setOrder] = useState(orders)
   
   useEffect(() => {
     index()
     .then(response => {
-      setCategory(response.data)
-      dispatch(setCategories(response.data));
+      setOrder(response.data)
+      dispatch(setOrders(response.data));
     });
-  }, [categories.length])
+  }, [dispatch])
 
   const handleDelButton = (ids) => {
     ids.forEach((id) => {
       destroy(id)
         .then((response) => {
-          dispatch(delCategories(id))
+          dispatch(delOrders(id))
         })
     })
   }
@@ -109,19 +104,19 @@ function OrderManager() {
                 <Tab label="Canceled" sx={{ textTransform: 'none' }} />
               </Tabs>
               <TabPanel value={value} index={0}>
-                <EnhancedTable rows={category.filter(obj => obj.status == 'pending')} headCells={headCells} title={'Pending'} clickDel={handleDelButton} EditButton={EditModal } />
+                <EnhancedTable rows={order.filter(obj => obj.status == 'pending')} headCells={headCells} title={'Pending'} clickDel={handleDelButton} ConfirmButton={ConfirmButton } ShowButton={ShowModal}/>
               </TabPanel>
               <TabPanel value={value} index={1}>
-                <EnhancedTable rows={category.filter(obj => obj.status == 'confirm')} headCells={headCells} title={'Confirm'} clickDel={handleDelButton} EditButton={EditModal } />
+                <EnhancedTable rows={order.filter(obj => obj.status == 'confirm')} headCells={headCells} title={'Confirm'} clickDel={handleDelButton} ConfirmButton={ConfirmButton } ShowButton={ShowModal}/>
               </TabPanel>
               <TabPanel value={value} index={2}>
-                <EnhancedTable rows={category.filter(obj => obj.status == 'shipping')} headCells={headCells} title={'Shipping'} clickDel={handleDelButton} EditButton={EditModal } />
+                <EnhancedTable rows={order.filter(obj => obj.status == 'shipping')} headCells={headCells} title={'Shipping'} clickDel={handleDelButton} ShowButton={ShowModal}/>
               </TabPanel>
               <TabPanel value={value} index={3}>
-                <EnhancedTable rows={category.filter(obj => obj.status == 'received')} headCells={headCells} title={'Received'} clickDel={handleDelButton} EditButton={EditModal } />
+                <EnhancedTable rows={order.filter(obj => obj.status == 'received')} headCells={headCells} title={'Received'} clickDel={handleDelButton} ShowButton={ShowModal}/>
               </TabPanel>
               <TabPanel value={value} index={4}>
-                <EnhancedTable rows={category.filter(obj => obj.status == 'canceled')} headCells={headCells} title={'Canceled'} clickDel={handleDelButton} EditButton={EditModal } />
+                <EnhancedTable rows={order.filter(obj => obj.status == 'canceled')} headCells={headCells} title={'Canceled'} clickDel={handleDelButton} ShowButton={ShowModal}/>
               </TabPanel>
             </Box>
           </Container> 

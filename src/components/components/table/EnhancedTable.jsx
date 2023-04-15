@@ -120,7 +120,7 @@ const Container = styled.div`
   border-radius: 18px;
 `
 
-function EnhancedTable({ rows, attach, headCells, title, clickDel, EditButton, AddButton }) {
+function EnhancedTable({ rows, attach, headCells, title, clickDel, EditButton, AddButton, ShowButton, ConfirmButton }) {
   const [order, setOrder] = React.useState(DEFAULT_ORDER);
   const [orderBy, setOrderBy] = React.useState(DEFAULT_ORDER_BY);
   const [selected, setSelected] = React.useState([]);
@@ -372,7 +372,8 @@ function EnhancedTable({ rows, attach, headCells, title, clickDel, EditButton, A
                           }
                           <TableCell align="right" style={{display: 'flex', justifyContent: 'space-around'}}>
                             <EditButton item={row} attach={attach} />
-                            <EditButton item={row} attach={attach} />
+                            <ShowButton item={row} attach={attach} />
+                            <ConfirmButton item={row} />
                           </TableCell>
                         </TableRow>
                       );
@@ -412,7 +413,9 @@ EnhancedTable.defaultProps = {
   title: '',
   clickDel: null,
   EditButton: React.Fragment,
-  AddButton: React.Fragment
+  AddButton: React.Fragment,
+  ShowButton: React.Fragment,
+  ConfirmButton: React.Fragment
 }
 
 export default EnhancedTable;

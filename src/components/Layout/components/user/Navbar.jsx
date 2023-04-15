@@ -10,7 +10,7 @@ import { useSelector, useDispatch} from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { logout } from '~/features/api/authAPI'
 import { logoutSuccess, logoutFailure } from "~/features/slice/authSlice";
-import { amount } from "~/features/slice/orderSlice"
+import { amount } from "~/features/slice/cartSlice"
 
 const Container = styled.div`
   height: 60px;

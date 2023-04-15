@@ -6,7 +6,7 @@ import { mobile } from "../responsive";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { clearCart, addToCart, remove, decrease, increase, toggleAmount, loading, displayItems, getTotals } from "../features/slice/orderSlice";
+import { clearCart, addToCart, remove, decrease, increase, toggleAmount, loading, displayItems, getTotals } from "~/features/slice/cartSlice";
 import { create } from "../features/api/orderAPI"
 
 const Container = styled.div``;
@@ -196,7 +196,7 @@ export default function Cart() {
   const navigate = useNavigate()
   
   const userId = useSelector(state => state.auth.user.id)
-  const selectorOrder = useSelector(state => state.order);
+  const selectorOrder = useSelector(state => state.cart);
   const [order, setOrder] = useState(selectorOrder.cart)
 
   useEffect(() => {

@@ -6,7 +6,7 @@ import {
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 
-import { addProductToCart } from "~/features/slice/orderSlice"
+import { addProductToCart } from "~/features/slice/cartSlice"
 
 const Info = styled.div`
   opacity: 0;

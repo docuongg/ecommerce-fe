@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 });
 
 function SideBar() {
-
+  const [index, setIndex] = useState(1)
   const classes = useStyles();
   
   return ( 
@@ -28,33 +28,37 @@ function SideBar() {
           <SubMenu label="Dashboard" icon={<LineAxisOutlinedIcon/>}>
             <ul>
               <Link to = "/dashboard/income">
-                <MenuItem className={classes.active} icon={<MonetizationOnOutlinedIcon/>}>
+                <MenuItem className={`${index == 1 ? classes.active : null}`} onClick={() => setIndex(1)} icon={<MonetizationOnOutlinedIcon/>}>
                   Income
                 </MenuItem>
               </Link>
               <Link to = "/dashboard/product">
-                <MenuItem icon={<LeaderboardOutlinedIcon/>}>
+                <MenuItem className={`${index == 2 ? classes.active : null}`} onClick={() => setIndex(2)} icon={<LeaderboardOutlinedIcon/>}>
                   Product
                 </MenuItem>
               </Link>
             </ul>
           </SubMenu>
           <Link to = "/manager/category">
-            <MenuItem icon={<CategoryOutlinedIcon/>}>
+            <MenuItem className={`${index == 3 ? classes.active : null}`} onClick={() => setIndex(3)} icon={<CategoryOutlinedIcon/>}>
               Category
             </MenuItem>
           </Link>
           <Link to = "/manager/product">
-            <MenuItem icon={<Inventory2OutlinedIcon/>}> 
+            <MenuItem className={`${index == 4 ? classes.active : null}`} onClick={() => setIndex(4)} icon={<Inventory2OutlinedIcon/>}> 
               Product 
             </MenuItem>
           </Link>
           <Link to = "/manager/order">
-            <MenuItem icon={<ListAltOutlinedIcon/>}> 
+            <MenuItem className={`${index == 5 ? classes.active : null}`} onClick={() => setIndex(5)} icon={<ListAltOutlinedIcon/>}> 
               Order
             </MenuItem>
           </Link>
-          <MenuItem icon={<AccountCircleOutlinedIcon/>}> Employee </MenuItem>
+          <Link to = "/manager/user">
+            <MenuItem className={`${index == 6 ? classes.active : null}`} onClick={() => setIndex(6)} icon={<AccountCircleOutlinedIcon/>}> 
+              Users 
+            </MenuItem>
+          </Link>
         </Menu>
       </Sidebar>
     </div>
