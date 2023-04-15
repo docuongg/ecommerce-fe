@@ -16,10 +16,6 @@ import Paper from '@mui/material/Paper';
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import styled from 'styled-components';
 import { Button } from '@material-ui/core';
@@ -124,7 +120,7 @@ const Container = styled.div`
   border-radius: 18px;
 `
 
-export default function EnhancedTable({ rows, attach, headCells, title, clickDel, EditButton, AddButton }) {
+function EnhancedTable({ rows, attach, headCells, title, clickDel, EditButton, AddButton, ShowButton, ConfirmButton }) {
   const [order, setOrder] = React.useState(DEFAULT_ORDER);
   const [orderBy, setOrderBy] = React.useState(DEFAULT_ORDER_BY);
   const [selected, setSelected] = React.useState([]);
@@ -374,8 +370,10 @@ export default function EnhancedTable({ rows, attach, headCells, title, clickDel
                               }
                             })
                           }
-                          <TableCell align="right">
+                          <TableCell align="right" style={{display: 'flex', justifyContent: 'space-around'}}>
                             <EditButton item={row} attach={attach} />
+                            <ShowButton item={row} attach={attach} />
+                            <ConfirmButton item={row} />
                           </TableCell>
                         </TableRow>
                       );
@@ -407,3 +405,17 @@ export default function EnhancedTable({ rows, attach, headCells, title, clickDel
     </Container>
   );
 }
+
+EnhancedTable.defaultProps = {
+  rows: [],
+  attach: false,
+  headCells: [],
+  title: '',
+  clickDel: null,
+  EditButton: React.Fragment,
+  AddButton: React.Fragment,
+  ShowButton: React.Fragment,
+  ConfirmButton: React.Fragment
+}
+
+export default EnhancedTable;
