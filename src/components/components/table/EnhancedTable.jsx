@@ -408,7 +408,7 @@ function EnhancedTable({ rows, attach, headCells, title, clickDel, EditButton, A
 
 EnhancedTable.defaultProps = {
   rows: [],
-  attach: false,
+  attach: [],
   headCells: [],
   title: '',
   clickDel: null,
