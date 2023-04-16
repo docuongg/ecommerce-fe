@@ -17,7 +17,7 @@ const publicRoutes = [
   { path: "/categories/:id", component: ProductCategory },
   { path: "/product", component: ProductDetail },
   { path: "/dashboard/income", component: AnalystOrder, layout: ManagerLayout },
-  { path: "/dashboard/product", component: AnalystProduct, layout: ManagerLayout },
+  { path: "/dashboard/products", component: AnalystProduct, layout: ManagerLayout },
   { path: "/manager/category", component: CategoryManager, layout: ManagerLayout },
   { path: "/manager/product", component: ProductManager, layout: ManagerLayout },
   { path: "/manager/order", component: OrderManager, layout: ManagerLayout },

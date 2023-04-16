@@ -18,9 +18,14 @@ const useStyles = makeStyles({
 });
 
 function SideBar() {
-  const [index, setIndex] = useState(1)
-  const classes = useStyles();
   
+  const classes = useStyles();
+  const url = window.location.href
+  const parts = url.split('/');
+
+  const currentPage = parts[parts.length - 1]
+  console.log(currentPage)
+
   return ( 
     <div style={{ display: 'flex', height: '90vh', maxWidth: '16vw'}}>
       <Sidebar backgroundColor="#fff">
@@ -28,34 +33,34 @@ function SideBar() {
           <SubMenu label="Dashboard" icon={<LineAxisOutlinedIcon/>}>
             <ul>
               <Link to = "/dashboard/income">
-                <MenuItem className={`${index == 1 ? classes.active : null}`} onClick={() => setIndex(1)} icon={<MonetizationOnOutlinedIcon/>}>
+                <MenuItem className={`${currentPage == 'income' ? classes.active : null}`} icon={<MonetizationOnOutlinedIcon/>}>
                   Income
                 </MenuItem>
               </Link>
-              <Link to = "/dashboard/product">
-                <MenuItem className={`${index == 2 ? classes.active : null}`} onClick={() => setIndex(2)} icon={<LeaderboardOutlinedIcon/>}>
+              <Link to = "/dashboard/products">  
+                <MenuItem className={`${currentPage == 'products' ? classes.active : null}`} icon={<LeaderboardOutlinedIcon/>}>
                   Product
                 </MenuItem>
               </Link>
             </ul>
           </SubMenu>
           <Link to = "/manager/category">
-            <MenuItem className={`${index == 3 ? classes.active : null}`} onClick={() => setIndex(3)} icon={<CategoryOutlinedIcon/>}>
+            <MenuItem className={`${currentPage == 'category' ? classes.active : null}`} icon={<CategoryOutlinedIcon/>}>
               Category
             </MenuItem>
           </Link>
           <Link to = "/manager/product">
-            <MenuItem className={`${index == 4 ? classes.active : null}`} onClick={() => setIndex(4)} icon={<Inventory2OutlinedIcon/>}> 
+            <MenuItem className={`${currentPage == 'product' ? classes.active : null}`} icon={<Inventory2OutlinedIcon/>}> 
               Product 
             </MenuItem>
           </Link>
           <Link to = "/manager/order">
-            <MenuItem className={`${index == 5 ? classes.active : null}`} onClick={() => setIndex(5)} icon={<ListAltOutlinedIcon/>}> 
+            <MenuItem className={`${currentPage == 'order' ? classes.active : null}`} icon={<ListAltOutlinedIcon/>}> 
               Order
             </MenuItem>
           </Link>
           <Link to = "/manager/user">
-            <MenuItem className={`${index == 6 ? classes.active : null}`} onClick={() => setIndex(6)} icon={<AccountCircleOutlinedIcon/>}> 
+            <MenuItem className={`${currentPage == 'user' ? classes.active : null}`} icon={<AccountCircleOutlinedIcon/>}> 
               Users 
             </MenuItem>
           </Link>
