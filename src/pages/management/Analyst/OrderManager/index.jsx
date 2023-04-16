@@ -14,6 +14,8 @@ import TrendingUpOutlinedIcon from '@mui/icons-material/TrendingUpOutlined';
 import { useEffect, useState } from "react";
 import styled from "styled-components"
 import ReactApexChart from "react-apexcharts";
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { index } from "~/features/api/analyst/orderAPI"
 import { StatsBox } from '~/components/components/statistic'
@@ -54,6 +56,8 @@ const ButtonDiv = styled.div`
   align-items: center
 `
 export default function OrderManager() {
+
+  const [openBackDrop, setOpenBackDrop] = React.useState(true);
 
   const [dateRange, setDateRange] = React.useState([
     dayjs('2023-04-1'),
@@ -174,6 +178,8 @@ export default function OrderManager() {
         totalOrders: response.data.general.total_orders,
         averageIncome: response.data.general.average_income
       })
+
+      setOpenBackDrop(false);
     });
   }, [selectedIndex, dateRange])
 
@@ -274,6 +280,12 @@ export default function OrderManager() {
             </SelectDiv>
             <ReactApexChart options={chartData.options} series={chartData.series} type="line" height={560} />
           </Container>
+          <Backdrop
+            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={openBackDrop}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
         </ColContainer>
       </RowContainer>
     </div>

@@ -1,3 +1,5 @@
+import React, { Suspense } from 'react';
+
 import styled from "styled-components"
 import SideBar from "./SideBar";
 import Header from "./Header";
@@ -20,7 +22,11 @@ function ManagerLayout({ children }) {
       <ParentContainer className="d-flex">
         <SideBar/>
         <ChildContainer>
-          { children }
+        {React.Children.map(children, child => (
+            <Suspense fallback={<div>Loading...</div>}>
+              {child}
+            </Suspense>
+          ))}
         </ChildContainer>
       </ParentContainer>
     </div>
