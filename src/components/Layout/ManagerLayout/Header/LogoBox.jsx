@@ -1,12 +1,13 @@
 import styled from "styled-components"
 import MenuIcon from '@mui/icons-material/Menu';
 import { useProSidebar } from 'react-pro-sidebar';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
   width: 240px;
-  position: relative;
+  position: relative
 `
 
 const LogoDiv = styled.div`
@@ -33,7 +34,6 @@ const IconDiv = styled.div`
     background-color:#aaa;
 	};
   background-color: #EDE7F6;
-  cursor: pointer
 `
 
 function LogoBox() {
@@ -41,9 +41,11 @@ function LogoBox() {
 
   return (
     <Container>
-      <LogoDiv>
-        <LogoImg src="https://logodix.com/logo/1931325.png"/> 
-      </LogoDiv>
+      <Link to='/'>
+        <LogoDiv>
+          <LogoImg src="https://logodix.com/logo/1931325.png"/> 
+        </LogoDiv>
+      </Link>
       <IconDiv>
         <MenuIcon onClick={() => collapseSidebar()}/>
       </IconDiv>
