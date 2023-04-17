@@ -21,6 +21,7 @@ const authSlice = createSlice({
     },
     loginFailure: (state, action) => {
       state.isLoading = false;
+      state.isLoggedIn = false;
       state.error = action.payload;
     },
     logoutSuccess: state => {

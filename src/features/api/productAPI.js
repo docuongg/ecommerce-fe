@@ -18,6 +18,10 @@ export const create = (categoryId, name, description, unit, price) => {
   });
 }
 
+export const show = (id) => {
+  return axios.get(`/products/${id}`);
+}
+
 export const update = (id, name, description, unit, price, categoryId) => {
   return axios.put(`/products/${id}`, {
     name: name,

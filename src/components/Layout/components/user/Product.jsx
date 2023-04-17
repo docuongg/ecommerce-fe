@@ -40,13 +40,16 @@ const Container = styled.div`
   align-items: center;
   background-color: #f5fbfd;
   position: relative;
+  border-radius: 18px;
   &:hover {
     ${Info} {
       opacity: 1;
     }
     ${Image} {
       opacity: 0.5;
+      border-radius: 18px; 
     }
+    
   }
 `;
 

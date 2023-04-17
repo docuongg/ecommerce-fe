@@ -21,7 +21,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout, login } from '~/features/api/authAPI'
-import { logoutSuccess, loginSuccess } from '~/features/slice/authSlice';
+import { logoutSuccess, loginSuccess, loginFailure } from '~/features/slice/authSlice';
 import { clearCart } from '~/features/slice/cartSlice';
 
 const Container = styled.div`
@@ -93,6 +93,7 @@ export default function ToolBar() {
         localStorage.setItem('uid', response.headers['uid'])
       })
       .catch(error => {
+        dispatch(loginFailure())
         localStorage.clear();
         navigate("/login");
       })
