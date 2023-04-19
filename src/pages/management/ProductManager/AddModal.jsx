@@ -14,6 +14,7 @@ function AddModal( {attach} ) {
   const [unit, setUnit] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
+  const [avatar, setAvatar] = useState(null);
 
   const handleOpen = () => {
     setOpen(true);
@@ -43,9 +44,13 @@ function AddModal( {attach} ) {
     setCategory(event.target.value);
   };
 
+  const handleAvatarChange = (event) => {
+    setAvatar(event.target.files[0]);
+  }
+
   const handleSave = () => {
     setOpen(false);
-    create(category, name, description, unit, price)
+    create(category, name, description, unit, price, avatar)
       .then(response => {
         window.location.reload()
       })
@@ -59,6 +64,12 @@ function AddModal( {attach} ) {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Nhập thông tin</DialogTitle>
         <DialogContent>
+          <TextField
+            id="file"
+            type="file"
+            name="file"
+            onChange={handleAvatarChange}
+          />
           <TextField
             autoFocus
             margin="dense"

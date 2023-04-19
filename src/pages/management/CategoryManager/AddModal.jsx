@@ -6,6 +6,7 @@ import { create } from "~/features/api/categoryAPI"
 function AddModal() {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState('');
+  const [avatar, setAvatar] = useState(null);
 
   const handleOpen = () => {
     setOpen(true);
@@ -15,13 +16,17 @@ function AddModal() {
     setOpen(false);
   };
 
+  const handleAvatarChange = (event) => {
+    setAvatar(event.target.files[0]);
+  }
+
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
 
   const handleSave = () => {
     setOpen(false);
-    create(name)
+    create(avatar, name)
       .then(response => {
         window.location.reload()
       })
@@ -35,6 +40,12 @@ function AddModal() {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Nhập thông tin</DialogTitle>
         <DialogContent>
+          <TextField
+            id="file"
+            type="file"
+            name="file"
+            onChange={handleAvatarChange}
+          />
           <TextField
             autoFocus
             margin="dense"

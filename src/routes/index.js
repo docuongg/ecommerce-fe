@@ -1,9 +1,9 @@
 import Home from "../pages/Home"
 import Login from "../pages/Login"
-import Cart from "../pages/Cart"
+import Cart from "~/pages/default/Cart"
 import Register from "../pages/Register"
-import ProductCategory from "../pages/ProductCategory"
-import ProductDetail from "../pages/ProductDetail"
+import ProductCategory from "~/pages/default/ProductCategory"
+import ProductDetail from "~/pages/default/ProductDetail"
 import Profile from "../pages/default/Profile"
 
 import { ManagerLayout } from "../components/Layout"
@@ -16,7 +16,7 @@ const publicRoutes = [
   { path: "/register", component: Register },
   { path: "/cart", component: Cart },
   { path: "/categories/:id", component: ProductCategory },
-  { path: "/product", component: ProductDetail },
+  { path: "/products/:id", component: ProductDetail },
   { path: "/profile", component: Profile },
   { path: "/dashboard/income", component: AnalystOrder, layout: ManagerLayout },
   { path: "/dashboard/products", component: AnalystProduct, layout: ManagerLayout },

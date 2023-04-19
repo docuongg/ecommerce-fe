@@ -17,12 +17,12 @@ const cartSlice = createSlice({
     addProductToCart: (state, action) => {
       let tempCart = state.cart.map((cartItem) => {
         if (cartItem.id === action.payload.id) {
-          return { ...cartItem, amount: cartItem.amount + 1 }
+          return { ...cartItem, amount: (cartItem.amount + action.payload.amount) }
         }
         return cartItem
       })
       state.cart = JSON.stringify(tempCart) !== JSON.stringify(state.cart) ? tempCart : [ ...state.cart, action.payload ]
-      state.amount = state.amount + 1
+      state.amount = state.amount + action.payload.amount
     },
     remove: (state, action) => {
       state.cart = state.cart.filter((cartItem) => cartItem.id !== action.payload)
