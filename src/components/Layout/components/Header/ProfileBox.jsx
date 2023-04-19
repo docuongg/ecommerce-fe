@@ -95,7 +95,6 @@ export default function ToolBar() {
       .catch(error => {
         dispatch(loginFailure())
         localStorage.clear();
-        navigate("/login");
       })
   }, [])
 

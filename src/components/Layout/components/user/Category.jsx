@@ -81,7 +81,7 @@ export default function Category({ category }) {
 
   return (
     <Container>
-      <Image src={category.thumbnail_url} />
+      <Image src={category.avatar_url || category.thumbnail_url} />
       <Link to = {`categories/${category.id}`}>
         <Info onClick={handleCategoryClick}>
           {/* <Icon>

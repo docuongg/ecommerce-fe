@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from "styled-components";
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField } from '@material-ui/core';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
@@ -7,6 +8,17 @@ import InputLabel from '@mui/material/InputLabel';
 import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import { update } from "~/features/api/productAPI"
 
+const AvatarDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+const ImgDiv = styled.div`
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+`
+
 function EditModal({ item, attach }) {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState(item.name);
@@ -14,6 +26,7 @@ function EditModal({ item, attach }) {
   const [unit, setUnit] = useState(item.unit);
   const [price, setPrice] = useState(item.price);
   const [category, setCategory] = useState(item.category_id);
+  const [avatar, setAvatar] = useState(item.avatar_url);
 
   const handleOpen = () => {
     setOpen(true);
@@ -43,9 +56,14 @@ function EditModal({ item, attach }) {
     setCategory(event.target.value);
   };
 
+  const handleAvatarChange = (event) => {
+
+    setAvatar(event.target.files[0]);
+  }
+
   const handleSave = () => {
     setOpen(false);
-    update(item.id, name, description, unit, price, category)
+    update(item.id, name, description, unit, price, category, avatar)
       .then(response => {
         window.location.reload()
       })
@@ -59,6 +77,17 @@ function EditModal({ item, attach }) {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Nhập thông tin</DialogTitle>
         <DialogContent>
+          {avatar && (
+            <ImgDiv>
+              <img src={avatar} alt="Preview" style={{maxWidth: '100%'}}/>
+            </ImgDiv>
+          )}
+          <TextField
+            id="file"
+            type="file"
+            name="file"
+            onChange={handleAvatarChange}
+          />
           <TextField
             autoFocus
             margin="dense"

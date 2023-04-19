@@ -9,14 +9,13 @@ export const login = (email, password) => {
   });
 };
 
-export const register = (fullname, username, password, passwordConfirmation, email, address) => {
+export const register = (fullname, username, password, passwordConfirmation, email) => {
   return axios.post(`${API_URL}/auth`, {
     full_name: fullname,
     email: email,
     user_name: username,
     password: password,
-    password_confirmation: passwordConfirmation,
-    address: address
+    password_confirmation: passwordConfirmation
   });
 };
 

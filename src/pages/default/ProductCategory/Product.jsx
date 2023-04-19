@@ -15,6 +15,10 @@ const Container = styled.div`
 
 const ImgDiv = styled.div`
   cursor: pointer;
+  overflow: hidden;
+  height: 300px;
+  display: flex; 
+  justify-content: center;
 `
 
 const ContentDiv = styled.div`
@@ -64,7 +68,7 @@ function Product( {item}) {
       <Container>
         <ImgDiv>
           <Link to = {`/products/${item.id}`}>
-            <img src={`${item.thumbnail_url}`} />
+            <img src={`${item.avatar_url || item.thumbnail_url}`} style={{maxWidth: '100%', height: 'auto', borderRadius: "10px 10px 0 0"}}/>
           </Link>
         </ImgDiv>
         <ContentDiv>

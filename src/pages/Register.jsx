@@ -82,15 +82,15 @@ export default function Register() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    register(fullname, email, username, password, passwordConfirmation)
+    register(fullname, username, password, passwordConfirmation, email)
       .then((response) => {
         login(email, password)
         .then((response) => {
+          const { data } = response.data;
+          dispatch(loginSuccess(data));
           localStorage.setItem("access-token", response.headers["access-token"]);
           localStorage.setItem("client", response.headers["client"]);
           localStorage.setItem("uid", response.headers["uid"]);
-          const { data } = response.data;
-          dispatch(loginSuccess(data));
         })
         navigate("/")
       })

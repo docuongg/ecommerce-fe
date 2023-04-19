@@ -8,28 +8,34 @@ export const index = (categoryId) => {
   return axios.get(`/categories/${categoryId}/products`);
 };
 
-export const create = (categoryId, name, description, unit, price) => {
-  return axios.post(`/products`, {
-    name: name,
-    description: description,
-    unit: unit,
-    price: price,
-    category_id: categoryId
-  });
+export const create = (categoryId, name, description, unit, price, avatar) => {
+  const formData = new FormData();
+
+  formData.append('product[name]', name);
+  formData.append('product[description]', description);
+  formData.append('product[unit]', unit);
+  formData.append('product[price]', price);
+  formData.append('product[category_id]', categoryId);
+  formData.append('product[avatar]', avatar);
+
+  return axios.post(`/products`, formData);
 }
 
 export const show = (id) => {
   return axios.get(`/products/${id}`);
 }
 
-export const update = (id, name, description, unit, price, categoryId) => {
-  return axios.put(`/products/${id}`, {
-    name: name,
-    description: description,
-    unit: unit,
-    price: price,
-    category_id: categoryId
-  });
+export const update = (id, name, description, unit, price, categoryId, avatar) => {
+  const formData = new FormData();
+
+  formData.append('product[name]', name);
+  formData.append('product[description]', description);
+  formData.append('product[unit]', unit);
+  formData.append('product[price]', price);
+  formData.append('product[category_id]', categoryId);
+  formData.append('product[avatar]', avatar);
+
+  return axios.put(`/products/${id}`, formData);
 }
 
 export const destroy = (id) => {

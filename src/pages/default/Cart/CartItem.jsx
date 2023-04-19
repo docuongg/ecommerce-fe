@@ -8,6 +8,9 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { clearCart, addToCart, remove, decrease, increase, toggleAmount, loading, displayItems, getTotals } from "~/features/slice/cartSlice";
 
 const Container = styled.div`
 
@@ -15,6 +18,9 @@ const Container = styled.div`
 
 const ImgDiv = styled.div`
   padding: 24px;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
 `
 
 const ContentDiv = styled.div`
@@ -48,7 +54,8 @@ const PriceText = styled.div`
 `
 
 const TotalPriceText = styled.div`
-
+  font-size: 24px;
+  font-weight: 650;
 `
 
 const GroupDiv = styled.div`
@@ -57,16 +64,14 @@ const GroupDiv = styled.div`
 
 function CartItem( {product} ) {
 
-  const [amount, setAmount] = useState(1)
+  const dispatch = useDispatch()
 
-  const handleIncrease = () => {
-    setAmount(amount+1)
+  const handleIncreaseAmount = (id) => {
+    dispatch(increase(id))
   }
 
-  const handleDecrease = () => {
-    if (amount > 1) {
-      setAmount(amount-1)
-    }
+  const handleDecreaseAmount = (id) => {
+    dispatch(decrease(id))
   }
 
   return (  
@@ -75,7 +80,7 @@ function CartItem( {product} ) {
         <Grid container rowSpacing={2} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           <Grid item xs={2}>
             <ImgDiv>
-              <img src={product.thumbnail_url} style={{width: '100px'}} />
+              <img src={product.avatar_url || product.thumbnail_url} style={{width: '100px'}} />
             </ImgDiv>
           </Grid>
           <Grid item xs={10}>
@@ -86,17 +91,18 @@ function CartItem( {product} ) {
                 <DescriptionText>{product.description}</DescriptionText>
                 <GroupDiv>
                   <ButtonGroup size="small" aria-label="large button group">
-                    <Button key="one" onClick={handleDecrease}><RemoveOutlinedIcon/></Button>
-                    <Button key="two">{amount}</Button>
-                    <Button key="three" onClick={handleIncrease}><AddOutlinedIcon/></Button>
+                    <Button key="one" onClick={() => handleDecreaseAmount(product.id)}><RemoveOutlinedIcon/></Button>
+                    <Button key="two">{product.amount}</Button>
+                    <Button key="three" onClick={() => handleIncreaseAmount(product.id)}><AddOutlinedIcon/></Button>
                   </ButtonGroup>
                 </GroupDiv>
               </RowChildSpace>
               <RowChildSpace>
                 <PriceText>$ {product.price}</PriceText>
-                <TotalPriceText></TotalPriceText>
+                <TotalPriceText>$ {product.price * product.amount}</TotalPriceText>
               </RowChildSpace>
             </ContentDiv>
+            <hr/>
           </Grid>
         </Grid>
       </Box>
