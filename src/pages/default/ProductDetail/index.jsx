@@ -11,6 +11,9 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
 import { useDispatch } from "react-redux";
 import { Carousel } from "@material-ui/core";
+import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { addProductToCart } from "~/features/slice/cartSlice"
 import { show } from "~/features/api/productAPI"
@@ -106,6 +109,16 @@ function ProductDetail() {
   const addToCart = (product) => {
     product = { ...product, amount: amount}
     dispatch(addProductToCart(product))
+    toast.success('Add to cart success!', {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   }
 
   return (  
@@ -152,13 +165,12 @@ function ProductDetail() {
                 </Stack>
               </div>
             </ProductDiv>
-            <div className="row">
-              
-            </div>
+            <ProductDiv className="row"></ProductDiv>
           </div>
           <div className="col-2"></div>
         </div>
       </ChildContainer>
+      <ToastContainer/>
     </Container>
   );
 }

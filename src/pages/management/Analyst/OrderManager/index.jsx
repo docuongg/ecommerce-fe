@@ -11,20 +11,24 @@ import MenuList from '@mui/material/MenuList';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import TrendingUpOutlinedIcon from '@mui/icons-material/TrendingUpOutlined';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import styled from "styled-components"
 import ReactApexChart from "react-apexcharts";
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-
 import { index } from "~/features/api/analyst/orderAPI"
 import { StatsBox } from '~/components/components/statistic'
+import jsPDF from 'jspdf';
 
 import dayjs from 'dayjs';
 import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
+
+import FinancialReport from './FinancialReport';
+import 'jspdf-autotable';
+import { useSelector } from 'react-redux';
 
 const options = ['Day', 'Month', 'Year'];
 
@@ -183,6 +187,61 @@ export default function OrderManager() {
     });
   }, [selectedIndex, dateRange])
 
+  const [age, setAge] = React.useState('');
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+
+  const chartRef = useRef(null);
+
+  const exportPDF = () => {
+  
+    const chart = chartRef.current.chart;
+    const pdf = new jsPDF();
+
+    pdf.setFont('Times');
+
+    pdf.text('KFC Store', 10, 10);
+    pdf.text('D/c: 10km, Tran Phu, Ha Dong', 10, 20);
+    pdf.text('Cong hoa xa hoi chu nghia Viet Nam', 100, 10);
+    pdf.text('Doc lap - Tu do - Hanh phuc', 110, 20);
+    pdf.text('Ha Noi, ngay ... thang ... nam ...', 120, 30);
+    pdf.text('BAO CAO DOANH THU', 75, 45);
+    pdf.text('BAO CAO DOANH THU', 75, 45);
+    pdf.text('BAO CAO DOANH THU', 75, 45);
+
+
+    pdf.text('Kinh gui: Giam doc chuoi cua hang KFC', 50, 55);
+    pdf.text('Toi la: Do Ngoc Cuong', 10, 65);
+    pdf.text('Chuc vu: Quan li chi nhanh', 10, 75);
+    pdf.text('Hom nay toi lap bao cao nay la de bao cao doanh thu cua cua hang tu ... den ... .', 10, 85);
+
+    pdf.text('1. Thong ke hoat dong ban bang', 10, 95);
+    pdf.autoTable({
+      startY: 100,
+      head: [['Type', 'Total Orders', 'Total Income', 'Extra Fee']], 
+      body: [
+        ['Success', `${statisticData.totalOrders}`, `${statisticData.totalIncome}`, '0'],
+        ['Canceled', '0', '0', '0'],
+        ['Total', `${statisticData.totalOrders}`, `${statisticData.totalIncome}`, '0']
+      ]
+    });
+
+    pdf.text('2. Bieu do duong the hien doanh thu so voi so don hang', 10, 140);
+    
+    pdf.text('3. Nhan xet, danh gia', 10, 250);
+    pdf.text('........................................................................................................................', 10, 260);
+  
+    pdf.text('Nguoi lap bao cao', 140, 270);
+    pdf.text('(Ky, ghi ro ho ten)', 140, 280);
+
+    chart.dataURI().then(({ imgURI, blob }) => {
+      pdf.addImage(imgURI, 'PNG', 5, 145, 200, 100);
+      pdf.save("pdf-chart.pdf");
+    });
+  };
+
   return (
     <div>
       <RowContainer>
@@ -203,10 +262,12 @@ export default function OrderManager() {
           </Container>
         </ColContainer>
         <ColContainer>
-          <Container>       
+          <Container>
             <ButtonDiv>  
-              <Button variant="contained"  >Search</Button>
-              <Button variant="contained" >Export</Button>
+              <Button variant="contained" onClick={exportPDF} >Export</Button>
+              {/* <button onClick={exportPDF}>Export to PDF</button> */}
+              {/* <App/> */}
+              {/* <Chart/> */}
             </ButtonDiv>    
           </Container>
         </ColContainer>
@@ -278,7 +339,7 @@ export default function OrderManager() {
                 )}
               </Popper>
             </SelectDiv>
-            <ReactApexChart options={chartData.options} series={chartData.series} type="line" height={560} />
+            <ReactApexChart options={chartData.options} series={chartData.series} type="line" height={560} ref={chartRef} />
           </Container>
           <Backdrop
             sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -288,6 +349,7 @@ export default function OrderManager() {
           </Backdrop>
         </ColContainer>
       </RowContainer>
+      <FinancialReport/>
     </div>
   );
 }

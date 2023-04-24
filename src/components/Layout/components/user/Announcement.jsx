@@ -38,7 +38,7 @@ export default function Announcement() {
 
   return (
 	<Content anno={anno}>
-		{'Siêu sale chính hãng 100%, đặt hàng ngay !'}
+		{'Flash Sale chao he, mua ngay !'}
 		<Icon onClick={handleAnno}><Clear style={{fontSize: '30px'}}/></Icon>
 	</Content>
   )

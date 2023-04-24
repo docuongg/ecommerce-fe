@@ -47,13 +47,13 @@ const Info = styled.div`
 const Title = styled.h1`
 	color: #fff;
 	margin-bottom: 20px;
+	text-shadow: 1px 1px black, -1px -1px black, -1px 1px black, 1px -1px black;
 `
-
 
 export default function CategoryItem( {item} ) {
   return (
 	<Container>
-		<Image src={item.img} />
+		<Image src={item.img} style={{filter: 'blur(1.5px)'}}/>
 		<Info>
 			<Title>
 				{item.title}

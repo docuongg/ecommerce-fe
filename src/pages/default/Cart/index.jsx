@@ -1,4 +1,6 @@
-import styled from "styled-components";
+import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';import styled from "styled-components";
+import 'react-toastify/dist/ReactToastify.css';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -69,6 +71,16 @@ function Cart() {
       .then((response) => {
         dispatch(clearCart())
         navigate("/")
+        toast.success('Order Success!', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       })
   }
 
