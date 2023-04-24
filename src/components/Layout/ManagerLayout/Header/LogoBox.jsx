@@ -43,7 +43,7 @@ function LogoBox() {
     <Container>
       <Link to='/'>
         <LogoDiv>
-          <LogoImg src="https://logodix.com/logo/1931325.png"/> 
+          <LogoImg src="https://logodix.com/logo/57007.jpg"/> 
         </LogoDiv>
       </Link>
       <IconDiv>

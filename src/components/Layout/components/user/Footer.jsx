@@ -91,7 +91,7 @@ export default function Footer() {
   return (
     <Container>
       <Left>
-        <Logo>Fashion Store</Logo>
+        <Logo>FAST FOOD</Logo>
         <Desc>
           Thời trang cao cấp ✓ <br/>
           Chất liệu vải cao cấp thân thiện môi trường ✓ <br/>

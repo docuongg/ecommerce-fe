@@ -4,7 +4,7 @@ import { EnhancedTable } from "~/components/components/table";
 import { useSelector, useDispatch } from "react-redux";
 import { destroy, index } from "~/features/api/orderAPI"
 import { useState, useEffect } from "react";
-import EditModal from "./EditModal";
+import DownloadInvoice from "./DownloadInvoice";
 import ConfirmButton from "./ConfirmButton";
 import ShowModal from "./ShowModal"
 import { setOrders, delOrders } from "~/features/slice/orderSlice";
@@ -104,7 +104,7 @@ function OrderManager() {
                 <Tab label="Canceled" sx={{ textTransform: 'none' }} />
               </Tabs>
               <TabPanel value={value} index={0}>
-                <EnhancedTable rows={order.filter(obj => obj.status == 'pending')} headCells={headCells} title={'Pending'} clickDel={handleDelButton} ConfirmButton={ConfirmButton } ShowButton={ShowModal}/>
+                <EnhancedTable rows={order.filter(obj => obj.status == 'pending')} headCells={headCells} title={'Pending'} clickDel={handleDelButton} ConfirmButton={ConfirmButton } ShowButton={ShowModal} DownloadInvoice={DownloadInvoice}/>
               </TabPanel>
               <TabPanel value={value} index={1}>
                 <EnhancedTable rows={order.filter(obj => obj.status == 'confirm')} headCells={headCells} title={'Confirm'} clickDel={handleDelButton} ConfirmButton={ConfirmButton } ShowButton={ShowModal}/>

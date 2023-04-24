@@ -82,23 +82,6 @@ export default function ToolBar() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const email = localStorage.getItem('uid')
-    const password = localStorage.getItem('password')
-    login(email, password)
-      .then((response) => {
-        const { data } = response.data;
-        dispatch(loginSuccess(data));
-        localStorage.setItem('access-token', response.headers['access-token'])
-        localStorage.setItem('client', response.headers['client'])
-        localStorage.setItem('uid', response.headers['uid'])
-      })
-      .catch(error => {
-        dispatch(loginFailure())
-        localStorage.clear();
-      })
-  }, [])
-
-  useEffect(() => {
     setIsLoggedIn(selectorStatus)
     setUser(selectorUser)
     setAmount(selectorAmount)
@@ -108,6 +91,7 @@ export default function ToolBar() {
     event.preventDefault();
     logout()
       .then((response) => {
+        dispatch(loginFailure())
         dispatch(logoutSuccess());
         dispatch(clearCart());
         localStorage.clear();

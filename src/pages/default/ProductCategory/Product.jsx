@@ -1,9 +1,12 @@
+import React from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import styled from "styled-components";
 import Rating from '@mui/material/Rating';
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 import Button from '@mui/material/Button';
 import { useDispatch } from "react-redux";
 import { BrowserRouter as Router, Link } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { addProductToCart } from "~/features/slice/cartSlice"
 
@@ -57,11 +60,23 @@ const PriceText = styled.div`
 function Product( {item}) {
 
   const dispatch = useDispatch()
-  
+
   const addToCart = (product) => {
     product = { ...product, amount: 1}
     dispatch(addProductToCart(product))
+    toast.success('Add to cart success!', {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   }
+
+  
 
   return (  
     <div className="col-2 px-2">
@@ -84,6 +99,7 @@ function Product( {item}) {
           </RowChildSpace>
         </ContentDiv>
       </Container>
+      <ToastContainer/>
     </div>
   );
 }

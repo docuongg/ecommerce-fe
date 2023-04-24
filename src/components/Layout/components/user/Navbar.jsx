@@ -123,7 +123,7 @@ export default function Navbar() {
           </SeacrhContainer>
         </Left>
         <Center>
-          <Logo><Link style={linkStyle} to='/'>FASHION STORE</Link></Logo>
+          <Logo><Link style={linkStyle} to='/'>FAST FOOD</Link></Logo>
         </Center>
         <Right>
           {isLoggedIn ? (

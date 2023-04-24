@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import { Dialog, DialogTitle, DialogContent, DialogActions, TextField } from '@material-ui/core';
 import EditModal from "~/pages/default/Profile/EditModal"
 import ChangePassword from './ChangePassword';
+import Orders from './Orders';
 export default function Profile() {
 
   const user = useSelector(state => state.auth.user)
@@ -66,6 +67,7 @@ export default function Profile() {
                   <MDBCardText className="lead fw-normal mb-0">Recent Order</MDBCardText>
                   <MDBCardText className="mb-0"><a href="#!" className="text-muted">Show all</a></MDBCardText>
                 </div>
+                <Orders id={user.id}/>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>

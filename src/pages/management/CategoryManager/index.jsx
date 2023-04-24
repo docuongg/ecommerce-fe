@@ -37,10 +37,10 @@ function CategoryManager() {
       label: 'Name',
     },
     {
-      id: 'thumbnail_url',
+      id: 'description',
       numeric: true,
       disablePadding: false,
-      label: 'Thumbnail_URL',
+      label: 'Description',
     }
   ];
 
