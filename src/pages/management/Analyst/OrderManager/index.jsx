@@ -65,8 +65,10 @@ export default function OrderManager() {
 
   const [dateRange, setDateRange] = React.useState([
     dayjs('2023-04-1'),
-    dayjs('2023-04-21'),
+    dayjs('2023-04-30'),
   ]);
+
+  const user = useSelector(state => state.auth.user)
 
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
@@ -201,21 +203,21 @@ export default function OrderManager() {
     const pdf = new jsPDF();
 
     pdf.setFont('Times');
-
+    const d = new Date()
     pdf.text('KFC Store', 10, 10);
     pdf.text('D/c: 10km, Tran Phu, Ha Dong', 10, 20);
     pdf.text('Cong hoa xa hoi chu nghia Viet Nam', 100, 10);
     pdf.text('Doc lap - Tu do - Hanh phuc', 110, 20);
-    pdf.text('Ha Noi, ngay ... thang ... nam ...', 120, 30);
+    pdf.text(`Ha Noi, ngay ${d.getDate()} thang ${d.getMonth() + 1} nam ${d.getFullYear()}`, 120, 30);
     pdf.text('BAO CAO DOANH THU', 75, 45);
     pdf.text('BAO CAO DOANH THU', 75, 45);
     pdf.text('BAO CAO DOANH THU', 75, 45);
 
 
     pdf.text('Kinh gui: Giam doc chuoi cua hang KFC', 50, 55);
-    pdf.text('Toi la: Do Ngoc Cuong', 10, 65);
+    pdf.text(`Toi la: ${user.full_name}`, 10, 65);
     pdf.text('Chuc vu: Quan li chi nhanh', 10, 75);
-    pdf.text('Hom nay toi lap bao cao nay la de bao cao doanh thu cua cua hang tu ... den ... .', 10, 85);
+    pdf.text(`Hom nay toi lap bao cao doanh thu cua cua hang tu ${dateRange[0].$d.getDate()+ '/' + (dateRange[0].$d.getMonth() + 1) + '/' + dateRange[0].$d.getFullYear()} den ${dateRange[1].$d.getDate()+ '/' + (dateRange[1].$d.getMonth() + 1) + '/' + dateRange[1].$d.getFullYear()} .`, 10, 85);
 
     pdf.text('1. Thong ke hoat dong ban bang', 10, 95);
     pdf.autoTable({

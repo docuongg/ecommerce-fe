@@ -19,7 +19,7 @@ export default function Profile() {
     <div className="gradient-custom-2" style={{ backgroundColor: '#EEF2F6' }}>
       <MDBContainer className="py-5 h-100">
         <MDBRow className="justify-content-center align-items-center h-100">
-          <MDBCol lg="9" xl="7">
+          <MDBCol lg="9" xl="9">
             <MDBCard>
               <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: '#000', height: '180px' }}>
                 <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '160px' }}>

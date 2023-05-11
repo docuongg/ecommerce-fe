@@ -22,6 +22,7 @@
     "bootstrap": "^5.2.3",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.7",
+    "diacritic": "^0.0.2",
     "file-saver": "^2.0.5",
     "html-to-pdf": "^0.1.11",
     "html2pdf.js": "^0.10.1",

@@ -25,7 +25,7 @@ function EditModal({ item, attach }) {
   const [description, setDescription] = useState(item.description);
   const [unit, setUnit] = useState(item.unit);
   const [price, setPrice] = useState(item.price);
-  const [category, setCategory] = useState(item.category_id);
+  const [category, setCategory] = useState(item.category_name);
   const [avatar, setAvatar] = useState(item.avatar_url);
 
   const handleOpen = () => {

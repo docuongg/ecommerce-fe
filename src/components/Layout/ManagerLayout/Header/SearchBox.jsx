@@ -132,8 +132,8 @@ function SearchBox() {
         </SearchBarLeft>
         
         <SearchBarCenter>
-              <SearchBarInputSpacer></SearchBarInputSpacer>
-              <SearchBarInput type="text" maxlength="2048" name="q" autocapitalize="off" autocomplete="off" title="Search" role="combobox" placeholder="Enter here ..."/>
+          <SearchBarInputSpacer></SearchBarInputSpacer>
+          <SearchBarInput type="text" maxlength="2048" name="q" autocapitalize="off" autocomplete="off" title="Search" role="combobox" placeholder="Enter here ..."/>
         </SearchBarCenter>
 
         <SearchBarRight>
