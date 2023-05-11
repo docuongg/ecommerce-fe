@@ -4,6 +4,13 @@ export const all = () => {
   return axios.get('/products')
 }
 
+export const search = (key) => {
+  const params = {
+    key: key
+  }
+  return axios.get(`/products/search?${new URLSearchParams(params)}`)
+}
+
 export const index = (categoryId) => {
   return axios.get(`/categories/${categoryId}/products`);
 };

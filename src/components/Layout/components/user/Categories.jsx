@@ -28,7 +28,6 @@ export default function Categories() {
     // Lấy danh sách category từ API
     index()
       .then(response => {
-        console.log(response.data)
         // Lưu danh sách category vào state
         dispatch(setCategories(response.data));
       });
