@@ -3,6 +3,8 @@ import { EnhancedTable } from "~/components/components/table";
 import { index } from "~/features/api/user/orderAPI"
 import { useState, useEffect } from "react";
 import ShowModal from "./ShowModal";
+import CancelButton from "./CancelButton"
+
 const RowContainer = styled.div`
   display: flex;
   margin-left: 12px;
@@ -52,7 +54,7 @@ function Orders({id}) {
   
   return ( 
     <div>
-      <EnhancedTable rows={orders} headCells={headCells} title={'Order'} ShowButton={ShowModal}/>
+      <EnhancedTable rows={orders} headCells={headCells} title={'Order'} ShowButton={ShowModal} CancelButton={CancelButton}/>
     </div>
   )
 }

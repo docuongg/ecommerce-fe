@@ -7,7 +7,7 @@ export const index = () => {
 export const create = (fullName, username, password, password_confirmation, email, address) => {
   return axios.post('/users', {
     full_name: fullName,
-    username: username,
+    user_name: username,
     password: password,
     password_confirmation: password_confirmation,
     email: email,
@@ -18,7 +18,7 @@ export const create = (fullName, username, password, password_confirmation, emai
 export const update = (id, fullName, username, email, address) => {
   return axios.put(`/users/${id}`, {
     full_name: fullName,
-    username: username,
+    user_name: username,
     email: email,
     address: address
   });

@@ -134,7 +134,7 @@ function ProductDetail() {
           <div className="col-8">
             <ProductDiv className="row">
               <div className="col-4">
-                <img src={`${product.thumbnail_url}`} />
+                <img src={`${product.avatar_url || product.thumbnail_url}`} style={{maxWidth: '100%', height: 'auto', borderRadius: "10px 10px 0 0"}} />
               </div>
               <div className="col-8">
                 <RowChildSpace>

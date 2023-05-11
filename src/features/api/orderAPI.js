@@ -4,10 +4,13 @@ export const index = () => {
   return axios.get('/orders');
 };
 
-export const create = (user_id, totalPrice, products) => {
+export const create = (user_id, totalPrice, products, address, description) => {
   return axios.post('/orders', {
     user_id: user_id,
     total_price: totalPrice,
+    status: 'pending',
+    address: address,
+    description: description,
     purchased_products_attributes: products.map((product) => {
       return {
         product_id: product.id,

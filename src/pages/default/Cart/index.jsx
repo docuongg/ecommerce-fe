@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
+import { TextField } from '@material-ui/core';
 
 import { clearCart, addToCart, remove, decrease, increase, toggleAmount, loading, displayItems, getTotals } from "~/features/slice/cartSlice";
 import { create } from "~/features/api/orderAPI"
@@ -56,10 +57,21 @@ function Cart() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  
-  const userId = useSelector(state => state.auth.user.id)
+
+  const user = useSelector(state => state.auth.user)
   const selectorOrder = useSelector(state => state.cart);
   const [cart, setOrder] = useState(selectorOrder.cart)
+
+  const [address, setAddress] = useState(user.address);
+  const [description, setDescription] = useState("");
+
+  const handleAddressChange = (event) => {
+    setAddress(event.target.value);
+  };
+
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value);
+  };
 
   useEffect(() => {
     setOrder(selectorOrder.cart)
@@ -67,7 +79,7 @@ function Cart() {
   }, [selectorOrder.cart, selectorOrder.amount]);
 
   const handlePayment = () => {
-    create(userId, selectorOrder.total, cart)
+    create(user.id, selectorOrder.total, cart, address, description)
       .then((response) => {
         dispatch(clearCart())
         navigate("/")
@@ -127,6 +139,24 @@ function Cart() {
                       <SummaryItemText>Tổng thanh toán</SummaryItemText>
                       <SummaryItemPrice>$ {selectorOrder.total + 10 - 25}</SummaryItemPrice>
                     </SummaryItem>
+                  </RowContainer>
+                  <RowContainer style={{backgroundColor: '#EEF2F6', marginTop: '24px'}}>
+                    <TextField
+                      autoFocus
+                      margin="dense"
+                      label="Address"
+                      fullWidth
+                      value={address}
+                      onChange={handleAddressChange}
+                    />
+                    <TextField
+                      autoFocus
+                      margin="dense"
+                      label="Description"
+                      fullWidth
+                      value={description}
+                      onChange={handleDescriptionChange}
+                    />
                   </RowContainer>
                   <Button variant="contained" color="success" endIcon={<LocalMallOutlinedIcon />} onClick={handlePayment} style={{width: '100%', fontSize: '18px', borderRadius: '18px', textAlign:'center', marginTop: '24px', paddingTop: '12px', paddingBottom: '12px'}}>
                     Pay Now

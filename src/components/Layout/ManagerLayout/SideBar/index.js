@@ -30,7 +30,7 @@ function SideBar() {
     <div style={{ display: 'flex', height: '90vh', maxWidth: '16vw'}}>
       <Sidebar backgroundColor="#fff">
         <Menu transitionDuration={700}>
-          <SubMenu label="Dashboard" icon={<LineAxisOutlinedIcon/>}>
+          <SubMenu label="Statistic" icon={<LineAxisOutlinedIcon/>}>
             <ul>
               <Link to = "/dashboard/income">
                 <MenuItem className={`${currentPage == 'income' ? classes.active : null}`} icon={<MonetizationOnOutlinedIcon/>}>

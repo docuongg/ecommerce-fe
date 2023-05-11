@@ -3,6 +3,7 @@ import DownloadOutlinedIcon from '@mui/icons-material/DownloadOutlined';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import Button from '@mui/material/Button';
+import diacritic from 'diacritic';
 
 import { index } from "~/features/api/purchasedProductAPI"
 
@@ -14,6 +15,7 @@ function DownloadInvoice({ item }) {
     try {
       const response = await index(item.id);
       const products = response.data;
+  console.log(products)
     
       const pdf = new jsPDF();
 
@@ -35,14 +37,14 @@ function DownloadInvoice({ item }) {
 
       pdf.line(10, 40, 200, 40)
 
-      pdf.text('Ten khach hang: Nguyen Van A', 10, 50);
-      pdf.text('So dien thoai: .....................', 10, 60);
-      pdf.text('Dia chi: .....................', 10, 70);
-      pdf.text('Ghi chu: .....................', 10, 80);
+      pdf.text(`Ten khach hang: ${item.user.full_name}`, 10, 50);
+      // pdf.text('So dien thoai: .....................', 10, 60);
+      pdf.text(`Dia chi: ${item.user.address}`, 10, 60);
+      pdf.text(`Ghi chu: ${diacritic.clean(item.description)}`, 10, 70);
       pdf.text('Duoi day la danh sach cac san pham :', 10, 90);
 
       const body = products.map((product, index) => (
-        Array(index + 1, product.product.name, product.amount, product.price, product.price*product.amount)
+        Array(index + 1, diacritic.clean(product.product.name), product.amount, product.price, product.price*product.amount)
       ))
 
       pdf.autoTable({
@@ -64,7 +66,7 @@ function DownloadInvoice({ item }) {
   }
 
   return (  
-    <Button variant="contained" color="primary" onClick={exportPDF}>
+    <Button variant="contained" color="success" onClick={exportPDF}>
       <DownloadOutlinedIcon/>
     </Button>
   );

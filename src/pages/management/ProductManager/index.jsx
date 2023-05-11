@@ -57,7 +57,7 @@ function ProductManager() {
       label: 'Price',
     },
     {
-      id: 'category_id',
+      id: 'category_name',
       numeric: true,
       disablePadding: false,
       label: 'Category',

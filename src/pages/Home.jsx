@@ -5,7 +5,7 @@ export default function Home() {
   return (
 	<div>
 		<Slider />
-		<Collections />
+		{/* <Collections /> */}
 		<Categories />
 	</div>
   )
