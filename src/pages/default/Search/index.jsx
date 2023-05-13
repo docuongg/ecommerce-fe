@@ -2,7 +2,10 @@ import styled from "styled-components"
 import { useParams } from "react-router-dom";
 import { index } from "~/features/api/productAPI"
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Button from '@mui/material/Button';
+import ArrowUpwardOutlinedIcon from '@mui/icons-material/ArrowUpwardOutlined';
+import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined';
 
 import Product from "../ProductCategory/Product";
 
@@ -19,6 +22,7 @@ const RowContainer = styled.div`
   background-color: #fff;
   padding: 12px 24px;
   display:flex;
+  justify-content: space-between;
 `
 
 const CategoryTitle = styled.div`
@@ -28,13 +32,36 @@ const CategoryTitle = styled.div`
 
 function Search() {
 
-  const products = useSelector(state => state.product.products)
+  const [products, setProducts] = useState([]);
+
+  const p = useSelector(state => state.product.products);
+
+  useEffect(() => {
+    setProducts(p);
+  }, [p]);
+
+  const [toggle, setToggle] = useState(true)
+
+  const up = () => {
+    setProducts(prevProducts => [...prevProducts].sort((a, b) => a.price - b.price));
+    setToggle(true)
+  }
+
+  const down = () => {
+    setProducts(prevProducts => [...prevProducts].sort((a, b) => b.price - a.price));
+    setToggle(false)
+  }
 
   return (  
     <Container>
       <ChildContainer>
         <RowContainer>
-          <CategoryTitle>Tim Kiem</CategoryTitle>
+          <CategoryTitle>Tìm Kiếm</CategoryTitle>
+          <div>
+            Sắp xếp :
+            <Button variant="contained" onClick={up} color={ toggle ? "primary" : "grey"}><ArrowUpwardOutlinedIcon /></Button>
+            <Button variant="contained" onClick={down} color={ toggle ? "grey" : "primary"} style={{marginLeft: '6px'}}><ArrowDownwardOutlinedIcon /></Button>
+          </div>
         </RowContainer>
       </ChildContainer>
       <ChildContainer>
