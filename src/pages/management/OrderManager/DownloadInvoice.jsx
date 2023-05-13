@@ -18,7 +18,8 @@ function DownloadInvoice({ item }) {
   console.log(products)
     
       const pdf = new jsPDF();
-
+      const date = new Date()
+      
       pdf.setFont('Times');
 
       pdf.line(10, 10, 200, 10)
@@ -38,7 +39,7 @@ function DownloadInvoice({ item }) {
       pdf.line(10, 40, 200, 40)
 
       pdf.text(`Ten khach hang: ${item.user.full_name}`, 10, 50);
-      // pdf.text('So dien thoai: .....................', 10, 60);
+      pdf.text(`Ngay mua: ${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear().toString()}`, 10, 80);
       pdf.text(`Dia chi: ${item.user.address}`, 10, 60);
       pdf.text(`Ghi chu: ${diacritic.clean(item.description)}`, 10, 70);
       pdf.text('Duoi day la danh sach cac san pham :', 10, 90);

@@ -3,11 +3,11 @@ import { useParams } from "react-router-dom";
 import { index } from "~/features/api/productAPI"
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { setProductsByCategory } from "~/features/slice/categorySlice";
 import Button from '@mui/material/Button';
 import ArrowUpwardOutlinedIcon from '@mui/icons-material/ArrowUpwardOutlined';
 import ArrowDownwardOutlinedIcon from '@mui/icons-material/ArrowDownwardOutlined';
-import Product from "./Product";
+
+import Product from "../ProductCategory/Product";
 
 const Container = styled.div`
   background-color: #EEF2F6;
@@ -30,21 +30,15 @@ const CategoryTitle = styled.div`
   font-weight: 650;
 `
 
-function ProductCategory() {
-
-  const { id } = useParams();
-
-  const selectedCategory = useSelector(state => state.category.selectedCategory);
+function Search() {
 
   const [products, setProducts] = useState([]);
 
-  const p = useSelector(state => state.category.productsByCategory);
+  const p = useSelector(state => state.product.products);
 
   useEffect(() => {
     setProducts(p);
   }, [p]);
-
-  const dispatch = useDispatch();
 
   const [toggle, setToggle] = useState(true)
 
@@ -57,21 +51,14 @@ function ProductCategory() {
     setProducts(prevProducts => [...prevProducts].sort((a, b) => b.price - a.price));
     setToggle(false)
   }
-  
-  useEffect(() => {
-    index(id)
-      .then(response => {
-        dispatch(setProductsByCategory(response.data));
-      })
-    window.scrollTo(0, 0);
-  }, [id, dispatch]);
 
   return (  
     <Container>
       <ChildContainer>
         <RowContainer>
-          <CategoryTitle>{selectedCategory.name}</CategoryTitle>
+          <CategoryTitle>Tìm Kiếm</CategoryTitle>
           <div>
+            Sắp xếp :
             <Button variant="contained" onClick={up} color={ toggle ? "primary" : "grey"}><ArrowUpwardOutlinedIcon /></Button>
             <Button variant="contained" onClick={down} color={ toggle ? "grey" : "primary"} style={{marginLeft: '6px'}}><ArrowDownwardOutlinedIcon /></Button>
           </div>
@@ -92,4 +79,4 @@ function ProductCategory() {
   );
 }
 
-export default ProductCategory;
+export default Search;
