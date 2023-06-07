@@ -7,7 +7,7 @@ import { mobile } from "~/responsive";
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  // height: 80vh;
   display: flex;
   position: relative;
   overflow: hidden;
@@ -23,7 +23,6 @@ const Arrow = styled.div`
   justify-content: center;
   align-items: center;
   position: absolute;
-  //can giua
   top: 0;
   bottom: 0;
   margin: auto;
@@ -42,15 +41,14 @@ const Arrow = styled.div`
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
-  transform: translateX(${props => props.slideIndex * -100}vw);
+  transform: translateX(${props => props.slideIndex * -105}vw);
   transition: all 1.5s ease;
 `;
 
 const Slide = styled.div`
   box-sizing: border-box;
-  padding: 0 40px;
-  width: 100vw;
-  height: 100vh;
+  // width: 100vw;
+  // height: 100vh;
   display: flex;
   align-items: center;
   background-color: #${(props) => props.bg};
@@ -58,11 +56,11 @@ const Slide = styled.div`
 
 const ImgContainer = styled.div`
   flex: 1;
-  height: 100%;
+
 `;
 
 const Image = styled.img`
-  height: 80%;
+
 `;
 
 const InfoContainer = styled.div`
@@ -116,13 +114,6 @@ export default function Slider() {
             <ImgContainer>
               <Image src={item.img} />
             </ImgContainer>
-            <InfoContainer>
-              <Title>{item.title}</Title>
-              <Desc>
-                {item.desc}
-              </Desc>
-              <Button>XEM NGAY</Button>
-            </InfoContainer>
           </Slide>
         ))}
       </Wrapper>

@@ -10,7 +10,9 @@ import Box from '@mui/material/Box';
 import { Dialog, DialogTitle, DialogContent, DialogActions, TextField } from '@material-ui/core';
 import EditModal from "~/pages/default/Profile/EditModal"
 import ChangePassword from './ChangePassword';
+import DiscountModal from './DiscountModal';
 import Orders from './Orders';
+
 export default function Profile() {
 
   const user = useSelector(state => state.auth.user)
@@ -38,6 +40,9 @@ export default function Profile() {
                   </div>
                   <div>
                     <ChangePassword  user = {user}/>
+                  </div>
+                  <div className="px-3">
+                    <DiscountModal user = {user}/>
                   </div>
                 </div>
               </div>

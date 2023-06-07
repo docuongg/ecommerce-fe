@@ -1,21 +1,21 @@
 export const sliderItems = [
   {
     id: 1,
-    img: "https://i.ibb.co/8XdTB1F/pngwing-com.png",
+    img: "https://i.ibb.co/YtrmtMD/gahoangkim.webp",
     title: "SUMMER SALE",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
     bg: "f5fafd",
   },
   {
     id: 2,
-    img: "https://i.ibb.co/dr3P111/favpng-pizza-baking-fast-food-cheese.png",
+    img: "https://i.ibb.co/54Kbhs8/gaOcQue.webp",
     title: "AUTUMN COLLECTION",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
     bg: "fcf1ed",
   },
   {
     id: 3,
-    img: "https://i.ibb.co/r7rz5wt/pngwing-com-1.png",
+    img: "https://i.ibb.co/bHSMz3g/buatruavuive.webp",
     title: "LOUNGEWEAR LOVE",
     desc: "DON'T COMPROMISE ON STYLE! GET FLAT 30% OFF FOR NEW ARRIVALS.",
     bg: "fbf0f4",

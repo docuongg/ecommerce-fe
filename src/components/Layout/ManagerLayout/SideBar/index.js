@@ -7,6 +7,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 import LeaderboardOutlinedIcon from '@mui/icons-material/LeaderboardOutlined';
 import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
+import PercentIcon from '@mui/icons-material/Percent';
 import { makeStyles } from '@material-ui/core/styles';
 import React from 'react';
 import { useEffect, useState } from "react";
@@ -52,6 +53,11 @@ function SideBar() {
           <Link to = "/manager/product">
             <MenuItem className={`${currentPage == 'product' ? classes.active : null}`} icon={<Inventory2OutlinedIcon/>}> 
               Product 
+            </MenuItem>
+          </Link>
+          <Link to = "/manager/discount">
+            <MenuItem className={`${currentPage == 'discount' ? classes.active : null}`} icon={<PercentIcon/>}> 
+              Discount 
             </MenuItem>
           </Link>
           <Link to = "/manager/order">

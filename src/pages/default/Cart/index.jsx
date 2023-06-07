@@ -1,5 +1,6 @@
 import React from 'react';
-import { ToastContainer, toast } from 'react-toastify';import styled from "styled-components";
+import { ToastContainer, toast } from 'react-toastify';
+import styled from "styled-components";
 import 'react-toastify/dist/ReactToastify.css';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -10,11 +11,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
-import { TextField } from '@material-ui/core';
+import { TextField, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core';
+import CloseIcon from '@mui/icons-material/Close';
 
-import { clearCart, addToCart, remove, decrease, increase, toggleAmount, loading, displayItems, getTotals } from "~/features/slice/cartSlice";
+import { clearCart, getTotals } from "~/features/slice/cartSlice";
 import { create } from "~/features/api/orderAPI"
 import CartItem from "./CartItem";
+import { index, update } from "~/features/api/user/userDiscountAPI"
+import AddressForm from "./AddressForm"
 
 const Container = styled.div`
   background-color: #EEF2F6;
@@ -49,6 +53,10 @@ const SummaryItem = styled.div`
   font-size: 20px;
 `;
 
+const SelectBox = styled.div`
+  display: flex;
+`
+
 const SummaryItemText = styled.span``;
 
 const SummaryItemPrice = styled.span``;
@@ -61,6 +69,9 @@ function Cart() {
   const user = useSelector(state => state.auth.user)
   const selectorOrder = useSelector(state => state.cart);
   const [cart, setOrder] = useState(selectorOrder.cart)
+  const [selectedOptions, setSelectedOptions] = useState(null);
+  const [discounts, setDiscounts] = useState([])
+  const [discountPrice, setDiscountPrice] = useState(0)
 
   const [address, setAddress] = useState(user.address);
   const [description, setDescription] = useState("");
@@ -73,15 +84,44 @@ function Cart() {
     setDescription(event.target.value);
   };
 
+  const handleChange = (event) => {
+    setSelectedOptions(event.target.value);
+  };
+
+  const handleClearSelection = (event) => {
+    event.stopPropagation();
+    setSelectedOptions(null);
+    console.log(selectedOptions)
+  };
+
   useEffect(() => {
     setOrder(selectorOrder.cart)
     dispatch(getTotals())
-  }, [selectorOrder.cart, selectorOrder.amount]);
+  }, [selectorOrder.cart, selectorOrder.amount, selectorOrder.fee]);
+
+  useEffect(() => {
+    index(user.id)
+    .then(response => {
+      setDiscounts(response.data)
+    })
+  }, [])
+
+  useEffect(() => {
+    if (selectedOptions && selectedOptions.discount) {
+      if (selectedOptions.discount.kind === "percent") {
+        setDiscountPrice(selectorOrder.total * selectedOptions.discount.value/100);
+      } else {
+        setDiscountPrice(parseInt(selectedOptions.discount.value));
+      }
+    }
+  }, [selectedOptions])
 
   const handlePayment = () => {
-    create(user.id, selectorOrder.total, cart, address, description)
+    create(user.id, selectorOrder.total + selectorOrder.fee - discountPrice, cart, address, description)
       .then((response) => {
         dispatch(clearCart())
+        const order = response.data
+        update(user.id, selectedOptions.id, order.id)
         navigate("/")
         toast.success('Order Success!', {
           position: "top-center",
@@ -129,19 +169,19 @@ function Cart() {
                     </SummaryItem>
                     <SummaryItem>
                       <SummaryItemText>Phí giao hàng</SummaryItemText>
-                      <SummaryItemPrice>$ 10</SummaryItemPrice>
+                      <SummaryItemPrice>$ {selectorOrder.fee}</SummaryItemPrice>
                     </SummaryItem>
                     <SummaryItem>
                       <SummaryItemText>Khuyến mãi</SummaryItemText>
-                      <SummaryItemPrice>$ -25</SummaryItemPrice>
+                      <SummaryItemPrice>$ {discountPrice}</SummaryItemPrice>
                     </SummaryItem>
                     <SummaryItem style={{ fontWeight: "200", fontSize: "24px" }}>
                       <SummaryItemText>Tổng thanh toán</SummaryItemText>
-                      <SummaryItemPrice>$ {selectorOrder.total + 10 - 25}</SummaryItemPrice>
+                      <SummaryItemPrice>$ {selectorOrder.total + selectorOrder.fee - discountPrice}</SummaryItemPrice>
                     </SummaryItem>
                   </RowContainer>
                   <RowContainer style={{backgroundColor: '#EEF2F6', marginTop: '24px'}}>
-                    <TextField
+                    {/* <TextField
                       autoFocus
                       margin="dense"
                       label="Address"
@@ -156,7 +196,32 @@ function Cart() {
                       fullWidth
                       value={description}
                       onChange={handleDescriptionChange}
-                    />
+                    /> */}
+                    <AddressForm/>
+                  </RowContainer>
+                  <RowContainer style={{backgroundColor: '#EEF2F6', marginTop: '24px'}}>
+                    <FormControl variant="standard" sx={{ m: 1, width: 240, marginTop: 1, marginLeft: 0 }} >
+                      <SelectBox>
+                        <InputLabel id="demo-simple-select-standard-label">Select Discount</InputLabel>
+                        <Select
+                          labelId="demo-simple-select-standard-label"
+                          id="demo-simple-select-standard"
+                          style={{ width: 480 }}
+                          value={selectedOptions?.discount.name}
+                          onChange={handleChange}
+                          label="Select Discount"
+                        >
+                        {
+                          discounts.map((discount, index) => {
+                            return <MenuItem value={discount} key={index}>{discount.discount.name}</MenuItem>
+                          })
+                        }
+                        </Select>
+                        <Button onClick={handleClearSelection} size="small" variant="outlined" sx={{ m: 0.5 }}>
+                          <CloseIcon/>
+                        </Button>
+                      </SelectBox>
+                    </FormControl>
                   </RowContainer>
                   <Button variant="contained" color="success" endIcon={<LocalMallOutlinedIcon />} onClick={handlePayment} style={{width: '100%', fontSize: '18px', borderRadius: '18px', textAlign:'center', marginTop: '24px', paddingTop: '12px', paddingBottom: '12px'}}>
                     Pay Now
