@@ -4,10 +4,13 @@ import styled from 'styled-components'
 import { mobile } from '~/responsive'
 
 const Container = styled.div`
-	height: 60vh;
+	// background-image: url("https://static.kfcvietnam.com.vn/images/content/home/mobileappbanner/lg/banner.jpg?v=3rXzE4");
+	height: 40vh;
+  box-sizing: border-box;
 	background-color: #fcf5f5;
 	display: flex;
 	justify-content: center;
+	margin-bottom: 48px;
 	align-items: center;
 	flex-direction: column;
 	${mobile({height: '30vh'})}

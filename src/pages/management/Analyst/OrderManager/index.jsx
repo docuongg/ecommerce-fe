@@ -351,7 +351,6 @@ export default function OrderManager() {
           </Backdrop>
         </ColContainer>
       </RowContainer>
-      <FinancialReport/>
     </div>
   );
 }
